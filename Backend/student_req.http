@@ -1,0 +1,56 @@
+### GET all students
+GET http://localhost:4000/students
+
+### REGISTER student
+POST http://localhost:4000/students/register
+Content-Type: application/json
+
+{
+    "name":"Tina",
+    "email":"tina@gmail.com",
+    "password":"tina890",
+    "branch":"CSE",
+    "cgpa":8.5,
+    "role":"student"
+}
+
+### LOGIN
+POST http://localhost:4000/students/login
+Content-Type: application/json
+
+{
+   "email":"tina@gmail.com",
+   "password":"tina890"
+}
+
+### APPLY FOR COMPANY
+POST http://localhost:4000/students/apply
+Content-Type: application/json
+
+{
+   "studentId":"6a0dd29d5097a4430178abe6",
+   "companyId":"6a0ebff8c0f0a6339ac4126b"
+}
+
+### GET APPLICATIONS
+GET http://localhost:4000/students/applications
+
+### GET ELIGIBLE COMPANIES
+GET http://localhost:4000/students/eligible-companies/6a0dd29d5097a4430178abe6
+
+### GET single student
+GET http://localhost:4000/students/PASTE_STUDENT_ID_HERE
+
+
+### UPDATE student
+PUT http://localhost:4000/students/PASTE_STUDENT_ID_HERE
+Content-Type: application/json
+
+{
+    "cgpa":9.5
+}
+
+
+### DELETE student
+DELETE http://localhost:4000/students/PASTE_STUDENT_ID_HERE
+
