@@ -1,15 +1,107 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function AdminDashboard() {
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+  } = useForm();
+
+  const [companies, setCompanies] = useState([]);
+
+  // Fetch companies
+  const getCompanies = async () => {
+
+    try {
+
+      const res = await axios.get(
+        "http://localhost:4000/admin/companies",
+        {
+          withCredentials: true,
+        }
+      );
+
+      setCompanies(res.data.payload);
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
+
+  };
+  
+  const deleteCompany = async (id) => {
+
+  try {
+
+    await axios.delete(
+      `http://localhost:4000/admin/company/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    toast.success("Company Deleted");
+
+    getCompanies();
+
+  } catch (err) {
+
+    toast.error("Delete Failed");
+
+    console.log(err);
+
+  }
+
+};
+  // Add company
+  const addCompany = async (companyData) => {
+
+    try {
+
+      await axios.post(
+        "http://localhost:4000/admin/add-company",
+        companyData,
+        {
+          withCredentials: true,
+        }
+      );
+
+      toast.success("Company Added Successfully");
+
+      getCompanies();
+
+      reset();
+
+    } catch (err) {
+
+      toast.error("Failed To Add Company");
+
+      console.log(err);
+
+    }
+
+  };
+
   useEffect(() => {
+
     document.title = "CampusHire | Admin Dashboard";
+
+    getCompanies();
+
   }, []);
 
   return (
+
     <div className="min-h-screen bg-slate-100 p-6">
 
       {/* Header */}
+
       <div className="bg-white rounded-2xl p-6 mb-6">
 
         <h1 className="text-3xl font-bold text-slate-800">
@@ -23,9 +115,11 @@ function AdminDashboard() {
       </div>
 
       {/* Statistics */}
+
       <div className="grid md:grid-cols-4 gap-6 mb-6">
 
         <div className="bg-white rounded-2xl p-6">
+
           <h2 className="text-slate-600 font-medium">
             Students
           </h2>
@@ -33,19 +127,23 @@ function AdminDashboard() {
           <p className="text-4xl font-bold text-blue-600 mt-3">
             120
           </p>
+
         </div>
 
         <div className="bg-white rounded-2xl p-6">
+
           <h2 className="text-slate-600 font-medium">
             Companies
           </h2>
 
           <p className="text-4xl font-bold text-green-600 mt-3">
-            15
+            {companies.length}
           </p>
+
         </div>
 
         <div className="bg-white rounded-2xl p-6">
+
           <h2 className="text-slate-600 font-medium">
             Applications
           </h2>
@@ -53,9 +151,11 @@ function AdminDashboard() {
           <p className="text-4xl font-bold text-purple-600 mt-3">
             85
           </p>
+
         </div>
 
         <div className="bg-white rounded-2xl p-6">
+
           <h2 className="text-slate-600 font-medium">
             Selected
           </h2>
@@ -63,45 +163,55 @@ function AdminDashboard() {
           <p className="text-4xl font-bold text-orange-600 mt-3">
             24
           </p>
+
         </div>
 
       </div>
 
       {/* Add Company Form */}
+
       <div className="bg-white rounded-2xl p-6 mb-6">
 
         <h2 className="text-2xl font-bold text-slate-800 mb-5">
           Add Company
         </h2>
 
-        <form className="grid md:grid-cols-2 gap-4">
+        <form
+          className="grid md:grid-cols-2 gap-4"
+          onSubmit={handleSubmit(addCompany)}
+        >
 
           <input
             type="text"
             placeholder="Company Name"
+            {...register("companyName")}
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
 
           <input
             type="number"
             placeholder="Minimum CGPA"
+            {...register("minCGPA")}
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
 
           <input
             type="text"
             placeholder="Allowed Branches"
+            {...register("allowedBranches")}
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
 
           <input
             type="text"
             placeholder="Package (LPA)"
+            {...register("package")}
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
 
           <input
             type="date"
+            {...register("driveDate")}
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
 
@@ -116,11 +226,12 @@ function AdminDashboard() {
 
       </div>
 
-      {/* Recent Companies */}
+      {/* Companies Table */}
+
       <div className="bg-white rounded-2xl p-6">
 
         <h2 className="text-2xl font-bold text-slate-800 mb-5">
-          Recent Companies
+          Companies
         </h2>
 
         <div className="overflow-x-auto">
@@ -140,62 +251,60 @@ function AdminDashboard() {
                 </th>
 
                 <th className="text-left py-3">
-                  Drive Date
+                  Min CGPA
                 </th>
 
                 <th className="text-left py-3">
+                  Drive Date
+                </th>
+                
+                <th className="text-left py-3">
                   Action
                 </th>
-
               </tr>
 
             </thead>
 
             <tbody>
 
-              <tr className="border-b">
+              {companies.map((company) => (
 
-                <td className="py-3">
-                  TCS
-                </td>
+                <tr
+                  key={company._id}
+                  className="border-b"
+                >
 
-                <td>
-                  7 LPA
-                </td>
+                  <td className="py-3">
+                    {company.companyName}
+                  </td>
 
-                <td>
-                  10-06-2026
-                </td>
+                  <td>
+                    {company.package} LPA
+                  </td>
 
-                <td>
-                  <button className="text-blue-600 font-medium">
-                    Edit
-                  </button>
-                </td>
+                  <td>
+                    {company.minCGPA}
+                  </td>
 
-              </tr>
+                  <td>
+                    {company.driveDate
+                      ? company.driveDate.slice(0, 10)
+                      : "N/A"}
+                  </td>
+                  <td>
 
-              <tr>
+  <button
+    onClick={() => deleteCompany(company._id)}
+    className="text-red-600 font-medium"
+  >
+    Delete
+  </button>
 
-                <td className="py-3">
-                  Infosys
-                </td>
+</td>
 
-                <td>
-                  6 LPA
-                </td>
+                </tr>
 
-                <td>
-                  15-06-2026
-                </td>
-
-                <td>
-                  <button className="text-blue-600 font-medium">
-                    Edit
-                  </button>
-                </td>
-
-              </tr>
+              ))}
 
             </tbody>
 
@@ -206,6 +315,7 @@ function AdminDashboard() {
       </div>
 
     </div>
+
   );
 }
 

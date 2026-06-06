@@ -1,16 +1,19 @@
-import { Outlet } from "react-router";
 import Navbar from "./Navbar";
+import { Outlet } from "react-router";
 
 function RootLayout() {
   return (
-    <div className="bg-slate-100 min-h-screen">
+    <div
+      className="min-h-screen"
+      style={{
+        backgroundColor: "#F9F8FF",
+      }}
+    >
+      <Navbar />
 
-      <Navbar/>
-
-      <main className="max-w-7xl mx-auto">
+      <div >
         <Outlet />
-      </main>
-
+      </div>
     </div>
   );
 }

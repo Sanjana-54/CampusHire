@@ -108,7 +108,18 @@ if (!isMatched) {
 });
 
 // APPLY FOR COMPANY
-studentApp.post("/apply",verifyToken("student"), async (req, res) => {
+studentApp.post("/apply", verifyToken("student"), async (req, res) => {
+
+    const existingApplication = await Application.findOne({
+        studentId: req.body.studentId,
+        companyId: req.body.companyId
+    });
+
+    if (existingApplication) {
+        return res.status(400).json({
+            message: "Already applied for this company"
+        });
+    }
 
     const application = await Application.create(req.body);
 
@@ -120,11 +131,12 @@ studentApp.post("/apply",verifyToken("student"), async (req, res) => {
 });
 
 // GET ALL APPLICATIONS
-studentApp.get("/applications", verifyToken("student"),async (req, res) => {
+studentApp.get("/applications/:studentId", verifyToken("student"), async (req, res) => {
 
-    const applications = await Application.find()
-        .populate("studentId")
-        .populate("companyId");
+    const applications = await Application.find({
+        studentId: req.params.studentId
+    })
+    .populate("companyId");
 
     res.status(200).json({
         message: "Applications fetched successfully",

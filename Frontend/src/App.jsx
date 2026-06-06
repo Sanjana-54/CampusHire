@@ -5,7 +5,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import StudentDashboard from "./components/StudentDashboard";
 import AdminDashboard from "./components/AdminDashboard";
-
+import Companies from "./components/Companies";
+import Applications from "./components/Applications";
+import AdminApplications from "./components/AdminApplications";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -35,8 +37,19 @@ function App() {
         {
           path: "admin-dashboard",
           element: <AdminDashboard />
-        }
-
+        },
+        {
+          path: "/companies",
+          element: <Companies />,
+        },
+        {
+         path: "/applications",
+         element: <Applications />,
+         },
+        {
+        path:"/admin-applications",
+        element:<AdminApplications />,
+        },
       ]
     }
   ]);

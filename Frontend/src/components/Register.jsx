@@ -2,62 +2,88 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 function Register() {
-
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
 
-  const onUserRegister = (userData) => {
+  const onUserRegister = async (userData) => {
 
-    console.log(userData);
+  try {
 
-    toast.success("Registration Successful");
+    const res = await axios.post(
+      "http://localhost:4000/students/register",
+      userData
+    );
+
+    toast.success(res.data.message);
 
     navigate("/");
-  };
 
-  useEffect(() => {
-    document.title = "CampusHire | Register";
-  }, []);
+  } catch (err) {
+
+    toast.error(
+      err.response?.data?.message ||
+      "Registration Failed"
+    );
+
+  }
+
+};
 
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center px-6">
+    <div className="h-[calc(100vh-80px)] flex items-center justify-center px-6">
 
-      <div className="w-full max-w-6xl bg-white rounded-3xl overflow-hidden grid lg:grid-cols-2">
+      <div className="w-full max-w-6xl bg-white rounded-[32px] overflow-hidden shadow-lg grid lg:grid-cols-2">
 
-        {/* Left Section */}
-        <div className="bg-blue-600 text-white p-12 flex flex-col justify-center">
+        {/* LEFT PANEL */}
 
-          <h1 className="text-5xl font-bold mb-4">
-            CampusHire
+        <div
+          className="p-12 flex flex-col justify-center text-white"
+          style={{
+            background:
+              "linear-gradient(135deg,#2D1B69 0%, #4C2F9E 100%)",
+          }}
+        >
+          <h1 className="text-5xl font-bold mb-5">
+            Campus
+            <span style={{ color: "#FF7043" }}>
+              Hire
+            </span>
           </h1>
 
-          <h2 className="text-2xl font-semibold mb-6">
-            Join the Placement Portal
+          <h2 className="text-2xl font-semibold mb-5">
+            Start Your Placement Journey
           </h2>
 
-          <p className="text-blue-100 leading-relaxed">
-            Register yourself, explore opportunities,
-            apply for companies and track your placement journey.
+          <p className="text-lg leading-relaxed text-violet-100">
+            Register, apply for companies,
+            track interviews and land your dream job.
           </p>
-
         </div>
 
-        {/* Right Section */}
+        {/* RIGHT PANEL */}
+
         <div className="p-10 lg:p-14">
 
-          <h2 className="text-3xl font-bold text-slate-800 mb-2">
+          <h2
+            className="text-5xl font-bold mb-3"
+            style={{ color: "#111827" }}
+          >
             Create Account
           </h2>
 
-          <p className="text-slate-500 mb-8">
-            Register to get started
+          <p
+            className="text-lg mb-8"
+            style={{ color: "#7A7A7A" }}
+          >
+            Register to continue
           </p>
 
           <form
@@ -68,9 +94,10 @@ function Register() {
             <input
               type="text"
               placeholder="Full Name"
-              className="w-full border border-slate-300 rounded-xl px-4 py-3"
+              className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+              style={{ borderColor: "#E5E7EB" }}
               {...register("name", {
-                required: "Name is required"
+                required: "Name is required",
               })}
             />
 
@@ -83,9 +110,10 @@ function Register() {
             <input
               type="email"
               placeholder="Email"
-              className="w-full border border-slate-300 rounded-xl px-4 py-3"
+              className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+              style={{ borderColor: "#E5E7EB" }}
               {...register("email", {
-                required: "Email is required"
+                required: "Email is required",
               })}
             />
 
@@ -98,9 +126,10 @@ function Register() {
             <input
               type="password"
               placeholder="Password"
-              className="w-full border border-slate-300 rounded-xl px-4 py-3"
+              className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+              style={{ borderColor: "#E5E7EB" }}
               {...register("password", {
-                required: "Password is required"
+                required: "Password is required",
               })}
             />
 
@@ -112,10 +141,11 @@ function Register() {
 
             <input
               type="text"
-              placeholder="Branch (CSE, IT, ECE...)"
-              className="w-full border border-slate-300 rounded-xl px-4 py-3"
+              placeholder="Branch"
+              className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+              style={{ borderColor: "#E5E7EB" }}
               {...register("branch", {
-                required: "Branch is required"
+                required: "Branch is required",
               })}
             />
 
@@ -123,26 +153,35 @@ function Register() {
               type="number"
               step="0.01"
               placeholder="CGPA"
-              className="w-full border border-slate-300 rounded-xl px-4 py-3"
+              className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+              style={{ borderColor: "#E5E7EB" }}
               {...register("cgpa", {
-                required: "CGPA is required"
+                required: "CGPA is required",
               })}
             />
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
+              className="w-full text-white text-xl font-semibold py-3 rounded-xl"
+              style={{
+                background:
+                  "linear-gradient(90deg,#4C2F9E 0%, #FF7043 100%)",
+              }}
             >
               Register
             </button>
 
           </form>
 
-          <p className="text-center text-slate-500 mt-8">
+          <p
+            className="text-center mt-8"
+            style={{ color: "#7A7A7A" }}
+          >
             Already have an account?{" "}
             <button
               onClick={() => navigate("/")}
-              className="text-blue-600 font-medium hover:underline"
+              className="font-semibold"
+              style={{ color: "#FF7043" }}
             >
               Login
             </button>

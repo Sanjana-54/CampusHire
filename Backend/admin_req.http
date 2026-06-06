@@ -40,6 +40,8 @@ Content-Type: application/json
     "status":"Round 1 Cleared"
 }
 
+GET http://localhost:4000/admin/applications
+
 ### UPDATE APPLICATION STATUS
 PATCH http://localhost:4000/admin/update-status/PASTE_APPLICATION_ID
 Content-Type: application/json

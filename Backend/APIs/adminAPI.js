@@ -75,6 +75,23 @@ adminApp.delete("/company/:id", verifyToken("admin"),async (req, res) => {
 
 });
 
+// GET ALL APPLICATIONS
+adminApp.get(
+  "/applications",
+  verifyToken("admin"),
+  async (req, res) => {
+
+    const applications = await Application.find()
+      .populate("studentId")
+      .populate("companyId");
+
+    res.status(200).json({
+      message: "Applications fetched successfully",
+      payload: applications
+    });
+
+  }
+);
 
 // UPDATE APPLICATION STATUS
 adminApp.patch("/update-status/:id", verifyToken("admin"),async (req, res) => {
