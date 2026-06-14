@@ -74,10 +74,7 @@ err.response?.data?.message ||
           }}
         >
           <h1 className="text-5xl font-bold mb-5">
-            Campus
-            <span style={{ color: "#FF7043" }}>
-              Hire
-            </span>
+            CampusHire
           </h1>
 
           <h2 className="text-2xl font-semibold mb-5">

@@ -165,13 +165,9 @@ studentApp.get("/eligible-companies/:id", verifyToken("student"),async (req, res
     const student = await Student.findById(req.params.id);
 
     // filter companies
-    const companies = await Company.find({
-
-        minCGPA: { $lte: student.cgpa },
-
-        allowedBranches: student.branch
-
-    });
+   const companies = await Company.find({
+    minCGPA: { $lte: student.cgpa }
+});
 
     res.status(200).json({
 
@@ -235,10 +231,9 @@ studentApp.get(
       await Student.findById(studentId);
 
     const eligibleCompanies =
-      await Company.countDocuments({
-        minCGPA: { $lte: student.cgpa },
-        allowedBranches: student.branch
-      });
+  await Company.countDocuments({
+    minCGPA: { $lte: student.cgpa }
+  });
 
     const applications =
       await Application.countDocuments({

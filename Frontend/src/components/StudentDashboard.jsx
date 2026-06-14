@@ -102,10 +102,9 @@ function StudentDashboard() {
 
           <button
             onClick={() => navigate("/applications")}
-            className="px-5 py-3 rounded-xl font-semibold"
+            className="px-5 py-3 rounded-xl  text-white font-semibold"
             style={{
-              backgroundColor: "#FFF3F0",
-              color: "#FF7043",
+              background: "linear-gradient(90deg,#4C2F9E,#FF7043)",
             }}
           >
             My Applications

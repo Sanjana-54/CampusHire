@@ -89,7 +89,7 @@ console.log("Navbar User:", user);
           {user && (
             <button
               onClick={() => {
-                localStorage.removeItem("user");
+              localStorage.clear();
                 window.location.href = "/";
               }}
               style={{ color: "#2D1B69" }}
