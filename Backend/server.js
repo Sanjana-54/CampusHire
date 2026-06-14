@@ -15,7 +15,10 @@ const app=exp();
 //enable cors
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "http://localhost:5173",
+      "https://campus-hire-wheat.vercel.app"
+    ],
     credentials: true,
   })
 );
