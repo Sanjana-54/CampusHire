@@ -13,7 +13,7 @@ function Companies() {
       try {
 
         const student = JSON.parse(
-          localStorage.getItem("student")
+          localStorage.getItem("user")
         );
 
         const res = await axios.get(
@@ -22,7 +22,7 @@ function Companies() {
             withCredentials: true,
           }
         );
-
+        console.log(res.data);
         setCompanies(res.data.payload);
 
       } catch (err) {

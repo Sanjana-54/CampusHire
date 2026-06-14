@@ -74,6 +74,17 @@ if (!isMatched) {
 
 }
 
+// check role
+if (user.role !== req.body.role) {
+
+return res.status(401).json({
+    message: `This account is not registered as ${req.body.role}`
+});
+
+
+}
+
+
     // generate token
     const token = jwt.sign(
 
@@ -92,16 +103,18 @@ if (!isMatched) {
 
     // send token in cookie
     res.cookie("token", token);
+   const userObj = user.toObject();
 
+delete userObj.password;
     // response
     res.status(200).json({
 
         message: "Login successful",
 
         payload: {
-            user,
-            token
-        }
+    user: userObj,
+    token
+}
 
     });
 
@@ -211,6 +224,42 @@ studentApp.delete("/:id", async (req, res) => {
 
 });
 
+studentApp.get(
+  "/dashboard-stats/:id",
+  verifyToken("student"),
+  async (req, res) => {
 
+    const studentId = req.params.id;
+
+    const student =
+      await Student.findById(studentId);
+
+    const eligibleCompanies =
+      await Company.countDocuments({
+        minCGPA: { $lte: student.cgpa },
+        allowedBranches: student.branch
+      });
+
+    const applications =
+      await Application.countDocuments({
+        studentId
+      });
+
+    const selected =
+      await Application.countDocuments({
+        studentId,
+        status: "Selected"
+      });
+
+    res.status(200).json({
+      payload: {
+        eligibleCompanies,
+        applications,
+        selected
+      }
+    });
+
+  }
+);
 
 export default studentApp;

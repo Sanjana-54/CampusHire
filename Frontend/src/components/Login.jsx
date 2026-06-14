@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
-
+  const [role, setRole] = useState("student");
   const {
     register,
     handleSubmit,
@@ -14,46 +14,47 @@ function Login() {
   } = useForm();
 
   const onUserLogin = async (userCredObj) => {
+try {
 
-  try {
 
-    const res = await axios.post(
-      "http://localhost:4000/students/login",
-      userCredObj,
-      {
-        withCredentials: true,
-      }
-    );
+const loginData = {
+  ...userCredObj,
+  role,
+};
 
-    const user = res.data.payload.user;
+const res = await axios.post(
+  "http://localhost:4000/students/login",
+  loginData,
+  {
+    withCredentials: true,
+  }
+);
 
-    localStorage.setItem(
-      "student",
-      JSON.stringify(user)
-    );
+const user = res.data.payload.user;
 
-    toast.success("Login Successful");
+localStorage.setItem(
+  "user",
+  JSON.stringify(user)
+);
+
+
+toast.success("Login Successful");
 
 if (user.role === "admin") {
-
-  navigate("/admin-dashboard");
-
+  window.location.href = "/admin-dashboard";
 } else {
-
-  navigate("/student-dashboard");
-
+  window.location.href = "/student-dashboard";
 }
 
-  } catch (err) {
 
-    toast.error(
-      err.response?.data?.message ||
-      "Login Failed"
-    );
-
-  }
-
+} catch (err) {
+toast.error(
+err.response?.data?.message ||
+"Login Failed"
+);
+}
 };
+
 
   useEffect(() => {
     document.title = "CampusHire | Login";
@@ -107,7 +108,20 @@ if (user.role === "admin") {
           >
             Sign in to continue
           </p>
+          <div className="mb-5">
+  <label className="block mb-2 font-medium">
+    Login As
+  </label>
 
+  <select
+    value={role}
+    onChange={(e) => setRole(e.target.value)}
+    className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+  >
+    <option value="student">Student</option>
+    <option value="admin">Admin</option>
+  </select>
+</div>
           <form
             className="space-y-5"
             onSubmit={handleSubmit(onUserLogin)}

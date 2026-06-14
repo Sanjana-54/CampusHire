@@ -6,7 +6,7 @@ function CompanyCard({ company }) {
   try {
 
     const student = JSON.parse(
-      localStorage.getItem("student")
+      localStorage.getItem("user")
     );
 
     await axios.post(

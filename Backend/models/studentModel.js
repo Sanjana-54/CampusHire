@@ -27,9 +27,11 @@ const studentSchema = new Schema({
     },
 
     role:{
-        type:String,
-        default:"student"
-    }
+type:String,
+enum:["student","admin"],
+default:"student"
+}
+
 
 });
 

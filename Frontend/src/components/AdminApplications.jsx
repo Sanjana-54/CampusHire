@@ -78,30 +78,60 @@ function AdminApplications() {
 
           <div
             key={application._id}
-            className="bg-white rounded-3xl p-6 shadow-sm"
+            className="bg-white rounded-3xl p-6 shadow-md border border-gray-100"
           >
 
-            <h2 className="text-xl font-semibold">
-              {application.studentId?.name}
-            </h2>
+            <div className="flex justify-between items-center">
 
-            <p>
-              Company:
-              {" "}
-              {application.companyId?.companyName}
-            </p>
+  <div>
 
-            <p>
-              Status:
-              {" "}
-              {application.status}
-            </p>
+    <h2
+      className="text-2xl font-bold"
+      style={{ color: "#2D1B69" }}
+    >
+      {application.studentId?.name}
+    </h2>
 
-            <p>
-              Round:
-              {" "}
-              {application.round}
-            </p>
+    <p className="text-gray-600 mt-2">
+  Company:
+  <span
+    className="font-semibold ml-2"
+    style={{ color: "#4C2F9E" }}
+  >
+    {application.companyId?.companyName || "Company Deleted"}
+  </span>
+</p>
+
+    <p className="text-gray-600">
+      Round:
+      <span className="font-semibold ml-2">
+        {application.round}
+      </span>
+    </p>
+
+  </div>
+
+  <div>
+
+    <span
+      className="px-4 py-2 rounded-full text-white"
+      style={{
+        backgroundColor:
+          application.status === "Applied"
+            ? "#4C2F9E"
+            : application.status === "Selected"
+            ? "#22C55E"
+            : application.status === "Rejected"
+            ? "#EF4444"
+            : "#FF7043"
+      }}
+    >
+      {application.status}
+    </span>
+
+  </div>
+
+</div>
            <select
   defaultValue={application.status}
   onChange={(e) =>
@@ -110,7 +140,7 @@ function AdminApplications() {
       e.target.value
     )
   }
-  className="border rounded-lg px-3 py-2 mt-3"
+  className="border border-gray-300 rounded-xl px-4 py-2 mt-4 w-48"
 >
   <option value="Applied">
     Applied

@@ -112,5 +112,35 @@ adminApp.patch("/update-status/:id", verifyToken("admin"),async (req, res) => {
 
 });
 
+adminApp.get(
+"/dashboard-stats",
+verifyToken("admin"),
+async (req, res) => {
+
+
+const totalStudents = await Student.countDocuments();
+
+const totalCompanies = await Company.countDocuments();
+
+const totalApplications =
+  await Application.countDocuments();
+
+const selectedStudents =
+  await Application.countDocuments({
+    status: "Selected"
+  });
+
+res.status(200).json({
+  payload: {
+    totalStudents,
+    totalCompanies,
+    totalApplications,
+    selectedStudents
+  }
+});
+
+
+}
+);
 
 export default adminApp;

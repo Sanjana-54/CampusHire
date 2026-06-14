@@ -18,7 +18,7 @@ function Applications() {
     try {
 
       const student = JSON.parse(
-        localStorage.getItem("student")
+        localStorage.getItem("user")
       );
 
       const res = await axios.get(

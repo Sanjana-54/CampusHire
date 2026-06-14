@@ -8,6 +8,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import Companies from "./components/Companies";
 import Applications from "./components/Applications";
 import AdminApplications from "./components/AdminApplications";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -30,26 +31,46 @@ function App() {
         },
 
         {
-          path: "student-dashboard",
-          element: <StudentDashboard />
-        },
+  path: "student-dashboard",
+  element: (
+    <ProtectedRoute allowedRole="student">
+      <StudentDashboard />
+    </ProtectedRoute>
+  )
+},
 
         {
-          path: "admin-dashboard",
-          element: <AdminDashboard />
-        },
-        {
-          path: "/companies",
-          element: <Companies />,
-        },
-        {
-         path: "/applications",
-         element: <Applications />,
-         },
-        {
-        path:"/admin-applications",
-        element:<AdminApplications />,
-        },
+  path: "admin-dashboard",
+  element: (
+    <ProtectedRoute allowedRole="admin">
+      <AdminDashboard />
+    </ProtectedRoute>
+  )
+},
+       {
+  path: "companies",
+  element: (
+    <ProtectedRoute allowedRole="student">
+      <Companies />
+    </ProtectedRoute>
+  )
+},
+ {
+  path: "applications",
+  element: (
+    <ProtectedRoute allowedRole="student">
+      <Applications />
+    </ProtectedRoute>
+  )
+},
+{
+  path: "admin-applications",
+  element: (
+    <ProtectedRoute allowedRole="admin">
+      <AdminApplications />
+    </ProtectedRoute>
+  )
+}
       ]
     }
   ]);

@@ -11,8 +11,17 @@ function AdminDashboard() {
     reset,
   } = useForm();
 
-  const [companies, setCompanies] = useState([]);
+  const user = JSON.parse(
+  localStorage.getItem("user")
+);
 
+  const [companies, setCompanies] = useState([]);
+  const [stats, setStats] = useState({
+  totalStudents: 0,
+  totalCompanies: 0,
+  totalApplications: 0,
+  selectedStudents: 0,
+});
   // Fetch companies
   const getCompanies = async () => {
 
@@ -35,6 +44,26 @@ function AdminDashboard() {
 
   };
   
+  const getDashboardStats = async () => {
+
+  try {
+
+    const res = await axios.get(
+      "http://localhost:4000/admin/dashboard-stats",
+      {
+        withCredentials: true,
+      }
+    );
+
+    setStats(res.data.payload);
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+
+};
   const deleteCompany = async (id) => {
 
   try {
@@ -90,11 +119,12 @@ function AdminDashboard() {
 
   useEffect(() => {
 
-    document.title = "CampusHire | Admin Dashboard";
+  document.title = "CampusHire | Admin Dashboard";
 
-    getCompanies();
+  getCompanies();
+  getDashboardStats();
 
-  }, []);
+}, []);
 
   return (
 
@@ -104,9 +134,9 @@ function AdminDashboard() {
 
       <div className="bg-white rounded-2xl p-6 mb-6">
 
-        <h1 className="text-3xl font-bold text-slate-800">
-          Admin Dashboard
-        </h1>
+       <h1 className="text-3xl font-bold text-slate-800">
+  Welcome Back, {user?.name} 👋
+</h1>
 
         <p className="text-slate-500 mt-2">
           Manage companies, students and placement drives.
@@ -125,8 +155,8 @@ function AdminDashboard() {
           </h2>
 
           <p className="text-4xl font-bold text-blue-600 mt-3">
-            120
-          </p>
+  {stats.totalStudents}
+</p>
 
         </div>
 
@@ -148,9 +178,9 @@ function AdminDashboard() {
             Applications
           </h2>
 
-          <p className="text-4xl font-bold text-purple-600 mt-3">
-            85
-          </p>
+         <p className="text-4xl font-bold text-purple-600 mt-3">
+  {stats.totalApplications}
+</p>
 
         </div>
 
@@ -161,8 +191,8 @@ function AdminDashboard() {
           </h2>
 
           <p className="text-4xl font-bold text-orange-600 mt-3">
-            24
-          </p>
+  {stats.selectedStudents}
+</p>
 
         </div>
 
@@ -217,7 +247,11 @@ function AdminDashboard() {
 
           <button
             type="submit"
-            className="bg-blue-600 text-white rounded-xl py-3 hover:bg-blue-700"
+           className="text-white rounded-xl py-3"
+style={{
+  background:
+    "linear-gradient(90deg,#4C2F9E,#FF7043)",
+}}
           >
             Add Company
           </button>
