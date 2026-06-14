@@ -23,7 +23,7 @@ function StudentDashboard() {
     try {
 
       const res = await axios.get(
-        `http://localhost:4000/students/dashboard-stats/${user._id}`,
+        ` https://campushire-pk1f.onrender.com/students/dashboard-stats/${user._id}`,
         {
           withCredentials: true,
         }
@@ -44,7 +44,7 @@ function StudentDashboard() {
     try {
 
       const res = await axios.get(
-        `http://localhost:4000/students/applications/${user._id}`,
+        ` https://campushire-pk1f.onrender.com/students/applications/${user._id}`,
         {
           withCredentials: true,
         }

@@ -10,7 +10,7 @@ function CompanyCard({ company }) {
     );
 
     await axios.post(
-      "http://localhost:4000/students/apply",
+      "https://campushire-pk1f.onrender.com/students/apply",
       {
         studentId: student._id,
         companyId: company._id,

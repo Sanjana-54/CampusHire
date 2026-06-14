@@ -10,7 +10,7 @@ function AdminApplications() {
     try {
 
       const res = await axios.get(
-        "http://localhost:4000/admin/applications",
+        "https://campushire-pk1f.onrender.com/admin/applications",
         {
           withCredentials: true,
         }
@@ -29,7 +29,7 @@ function AdminApplications() {
   try {
 
     await axios.patch(
-      `http://localhost:4000/admin/update-status/${applicationId}`,
+      `https://campushire-pk1f.onrender.com/admin/update-status/${applicationId}`,
       {
         status,
       },

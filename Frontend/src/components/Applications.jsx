@@ -22,7 +22,7 @@ function Applications() {
       );
 
       const res = await axios.get(
-        `http://localhost:4000/students/applications/${student._id}`,
+        `https://campushire-pk1f.onrender.com/students/applications/${student._id}`,
         {
           withCredentials: true,
         }

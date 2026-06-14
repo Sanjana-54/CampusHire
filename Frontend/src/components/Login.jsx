@@ -23,7 +23,7 @@ const loginData = {
 };
 
 const res = await axios.post(
-  "http://localhost:4000/students/login",
+  "https://campushire-pk1f.onrender.com/students/login",
   loginData,
   {
     withCredentials: true,

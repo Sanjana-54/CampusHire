@@ -28,7 +28,7 @@ function AdminDashboard() {
     try {
 
       const res = await axios.get(
-        "http://localhost:4000/admin/companies",
+        "https://campushire-pk1f.onrender.com/admin/companies",
         {
           withCredentials: true,
         }
@@ -49,7 +49,7 @@ function AdminDashboard() {
   try {
 
     const res = await axios.get(
-      "http://localhost:4000/admin/dashboard-stats",
+      "https://campushire-pk1f.onrender.com/admin/dashboard-stats",
       {
         withCredentials: true,
       }
@@ -69,7 +69,7 @@ function AdminDashboard() {
   try {
 
     await axios.delete(
-      `http://localhost:4000/admin/company/${id}`,
+      `https://campushire-pk1f.onrender.com/admin/company/${id}`,
       {
         withCredentials: true,
       }
@@ -94,7 +94,7 @@ function AdminDashboard() {
     try {
 
       await axios.post(
-        "http://localhost:4000/admin/add-company",
+        "https://campushire-pk1f.onrender.com/admin/add-company",
         companyData,
         {
           withCredentials: true,

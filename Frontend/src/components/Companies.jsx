@@ -17,7 +17,7 @@ function Companies() {
         );
 
         const res = await axios.get(
-          `http://localhost:4000/students/eligible-companies/${student._id}`,
+          `https://campushire-pk1f.onrender.com/students/eligible-companies/${student._id}`,
           {
             withCredentials: true,
           }

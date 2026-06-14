@@ -18,7 +18,7 @@ function Register() {
   try {
 
     const res = await axios.post(
-      "http://localhost:4000/students/register",
+      "https://campushire-pk1f.onrender.com/students/register",
       userData
     );
 
