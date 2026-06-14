@@ -41,9 +41,9 @@ localStorage.setItem(
 toast.success("Login Successful");
 
 if (user.role === "admin") {
-  window.location.href = "/admin-dashboard";
+  navigate("/admin-dashboard");
 } else {
-  window.location.href = "/student-dashboard";
+  navigate("/student-dashboard");
 }
 
 
