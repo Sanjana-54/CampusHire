@@ -1,9 +1,10 @@
 import { NavLink } from "react-router";
+import { useState, useEffect } from "react";
 
 function Navbar() {
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
+ const [user, setUser] = useState(
+  JSON.parse(localStorage.getItem("user"))
+);
 console.log("Navbar User:", user);
 const navStyle = ({ isActive }) => ({
   background: isActive
@@ -13,6 +14,11 @@ const navStyle = ({ isActive }) => ({
   padding: "8px 16px",
   borderRadius: "9999px",
 });
+useEffect(() => {
+  setUser(
+    JSON.parse(localStorage.getItem("user"))
+  );
+}, []);
   return (
     <div
       className="bg-white border-b-4"
