@@ -28,11 +28,19 @@ console.log("Navbar User:", user);
           {!user && (
             <>
               <NavLink
-                to="/"
-                style={{ color: "#2D1B69" }}
-              >
-                Login
-              </NavLink>
+  to="/"
+  className={({ isActive }) =>
+    isActive
+      ? "px-4 py-2 rounded-full text-white"
+      : "px-4 py-2"
+  }
+  style={({ isActive }) => ({
+    backgroundColor: isActive ? "#4C2F9E" : "transparent",
+    color: isActive ? "white" : "#2D1B69",
+  })}
+>
+  Login
+</NavLink>
 
               <NavLink
                 to="/register"

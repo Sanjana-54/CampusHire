@@ -63,9 +63,8 @@ err.response?.data?.message ||
 }, []);
 
   return (
-    <div className="h-[calc(100vh-80px)] flex items-center justify-center px-6">
-      <div className="w-full max-w-6xl bg-white rounded-[32px] overflow-hidden shadow-lg grid lg:grid-cols-2">
-
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 py-8">
+<div className="w-full max-w-6xl bg-white rounded-[32px] overflow-hidden shadow-lg grid lg:grid-cols-2 mt-6">
         {/* LEFT PANEL */}
 
         <div
