@@ -57,8 +57,10 @@ err.response?.data?.message ||
 
 
   useEffect(() => {
-    document.title = "CampusHire | Login";
-  }, []);
+  document.title = "CampusHire | Login";
+
+  localStorage.removeItem("user");
+}, []);
 
   return (
     <div className="h-[calc(100vh-80px)] flex items-center justify-center px-6">
