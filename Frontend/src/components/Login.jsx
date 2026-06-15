@@ -59,7 +59,7 @@ err.response?.data?.message ||
   useEffect(() => {
   document.title = "CampusHire | Login";
 
-  localStorage.removeItem("user");
+  //localStorage.removeItem("user");
 }, []);
 
   return (
