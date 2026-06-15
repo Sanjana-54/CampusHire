@@ -9,6 +9,7 @@ function StudentDashboard() {
   const user = JSON.parse(
     localStorage.getItem("user")
   );
+  console.log("Dashboard User:", user);
 
   const [stats, setStats] = useState({
     eligibleCompanies: 0,
