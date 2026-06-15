@@ -102,7 +102,11 @@ return res.status(401).json({
     );
 
     // send token in cookie
-    res.cookie("token", token);
+    res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+});
    const userObj = user.toObject();
 
 delete userObj.password;
