@@ -43,10 +43,13 @@ const newStudent = new Student(req.body);
 
     const student = await newStudent.save();
 
-    res.status(201).json({
-        message: "Student Registered Successfully",
-        payload: student
-    });
+   res.status(201).json({
+    message:
+      student.role === "admin"
+        ? "Admin Registered Successfully"
+        : "Student Registered Successfully",
+    payload: student
+});
 
 });
 
