@@ -6,6 +6,10 @@ function Navbar() {
   localStorage.getItem("user")
 );
 console.log("Navbar User:", user);
+console.log(
+  "Navbar localStorage:",
+  localStorage.getItem("user")
+);
 const navStyle = ({ isActive }) => ({
   background: isActive
     ? "linear-gradient(90deg,#4C2F9E,#FF7043)"
