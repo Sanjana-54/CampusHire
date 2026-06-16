@@ -26,12 +26,11 @@ const navStyle = ({ isActive }) => ({
 
   return (
     <div
-      className="bg-white border-b-4"
-      style={{ borderColor: "#4C2F9E" }}
-    >
-      <div className="flex justify-between items-center px-10 py-5">
+  className="bg-white"
+>
+      <div className="flex justify-between items-center px-8 py-4">
 
-        <h1 className="text-4xl font-bold text-red-500">
+        <h1 className="text-5xl font-extrabold">
           <span style={{ color: "#2D1B69" }}>
             Campus
           </span>
@@ -41,8 +40,7 @@ const navStyle = ({ isActive }) => ({
           </span>
         </h1>
 
-        <div className="flex gap-8 items-center">
-
+       <div className="flex gap-6 items-center mr-8">
           {!user && (
             <>
              <NavLink to="/" style={navStyle}>
