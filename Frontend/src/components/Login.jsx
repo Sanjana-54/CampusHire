@@ -41,11 +41,10 @@ localStorage.setItem(
 toast.success("Login Successful");
 
 if (user.role === "admin") {
-  navigate("/admin-dashboard");
+  window.location.replace("/admin-dashboard");
 } else {
-  navigate("/student-dashboard");
+  window.location.replace("/student-dashboard");
 }
-
 
 } catch (err) {
 toast.error(
@@ -59,7 +58,6 @@ err.response?.data?.message ||
   useEffect(() => {
   document.title = "CampusHire | Login";
 
-  //localStorage.removeItem("user");
 }, []);
 
   return (
