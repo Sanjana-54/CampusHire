@@ -1,16 +1,19 @@
-import { NavLink } from "react-router";
-
+import { NavLink,useLocation } from "react-router";
 
 function Navbar() {
- const user = JSON.parse(
-  localStorage.getItem("user")
-);
+
+  const location = useLocation();
+
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
 console.log("NAVBAR VERSION 123");
 console.log("Navbar User:", user);
 console.log(
   "Navbar localStorage:",
   localStorage.getItem("user")
 );
+console.log("Current Path:", location.pathname);
 const navStyle = ({ isActive }) => ({
   background: isActive
     ? "linear-gradient(90deg,#4C2F9E,#FF7043)"
