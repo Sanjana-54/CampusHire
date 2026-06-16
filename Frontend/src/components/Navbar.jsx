@@ -14,6 +14,7 @@ console.log(
   localStorage.getItem("user")
 );
 console.log("Current Path:", location.pathname);
+//work
 const navStyle = ({ isActive }) => ({
   background: isActive
     ? "linear-gradient(90deg,#4C2F9E,#FF7043)"
