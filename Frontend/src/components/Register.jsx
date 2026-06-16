@@ -29,9 +29,10 @@ function Register() {
   } catch (err) {
 
     toast.error(
-      err.response?.data?.message ||
-      "Registration Failed"
-    );
+  err.response?.data?.error ||
+  err.response?.data?.message ||
+  "Registration Failed"
+);
 
   }
 
