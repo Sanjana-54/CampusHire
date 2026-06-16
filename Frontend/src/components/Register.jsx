@@ -42,20 +42,19 @@ function Register() {
 };
 
   return (
-    <div className="h-[calc(100vh-80px)] flex items-center justify-center px-6">
-
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 md:px-6 py-8">
       <div className="w-full max-w-6xl bg-white rounded-[32px] overflow-hidden shadow-lg grid lg:grid-cols-2">
 
         {/* LEFT PANEL */}
 
         <div
-          className="p-12 flex flex-col justify-center text-white"
+          className="p-6 md:p-12 flex flex-col justify-center text-white"
           style={{
             background:
               "linear-gradient(135deg,#2D1B69 0%, #4C2F9E 100%)",
           }}
         >
-          <h1 className="text-5xl font-bold mb-5">
+          <h1 className="text-3xl md:text-5xl font-bold mb-5">
             CampusHire
           </h1>
 
@@ -71,7 +70,7 @@ function Register() {
 
         {/* RIGHT PANEL */}
 
-        <div className="p-10 lg:p-14">
+        <div className="p-6 md:p-10 lg:p-14">
 
           <h2
             className="text-5xl font-bold mb-3"

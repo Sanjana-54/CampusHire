@@ -66,13 +66,13 @@ err.response?.data?.message ||
         {/* LEFT PANEL */}
 
         <div
-          className="p-12 flex flex-col justify-center text-white"
+          className="p-6 md:p-12 flex flex-col justify-center text-white"
           style={{
             background:
               "linear-gradient(135deg,#2D1B69 0%, #4C2F9E 100%)",
           }}
         >
-          <h1 className="text-5xl font-bold mb-5">
+          <h1 className="text-3xl md:text-5xl font-bold mb-5">
             CampusHire
           </h1>
 
@@ -89,10 +89,10 @@ err.response?.data?.message ||
 
         {/* RIGHT PANEL */}
 
-        <div className="p-10 lg:p-14">
+        <div className="p-6 md:p-10 lg:p-14">
 
-          <h2
-            className="text-5xl font-bold mb-3"
+          
+           <h2 className="text-3xl md:text-5xl font-bold mb-3"
             style={{ color: "#111827" }}
           >
             Welcome Back
