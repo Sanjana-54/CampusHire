@@ -16,11 +16,14 @@ function Register() {
   const onUserRegister = async (userData) => {
 
   try {
-
+  const userDataWithRole = {
+  ...userData,
+  role: "admin"
+};
     const res = await axios.post(
-      "https://campushire-pk1f.onrender.com/students/register",
-      userData
-    );
+  "https://campushire-pk1f.onrender.com/students/register",
+  userDataWithRole
+);
 
     toast.success(res.data.message);
 
