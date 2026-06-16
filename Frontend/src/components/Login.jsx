@@ -112,7 +112,7 @@ err.response?.data?.message ||
   <select
     value={role}
     onChange={(e) => setRole(e.target.value)}
-    className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+    className="w-full border-2 rounded-xl px-5 py-3 pr-12 outline-none"
   >
     <option value="student">Student</option>
     <option value="admin">Admin</option>
