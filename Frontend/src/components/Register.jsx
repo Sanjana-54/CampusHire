@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useEffect} from "react";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function Register() {
+  const [role, setRole] = useState("student");
   const navigate = useNavigate();
 
   const {
@@ -14,12 +16,20 @@ function Register() {
   } = useForm();
 
   const onUserRegister = async (userData) => {
+if (
+    role === "admin" &&
+    userData.secretCode !== "CAMPUSHIRE2026"
+  ) {
+    toast.error("Invalid Admin Secret Code");
+    return;
+  }
 
-  try {
   const userDataWithRole = {
-  ...userData,
-  role: "admin"
-};
+    ...userData,
+    role,
+  };
+
+  try{
     const res = await axios.post(
   "https://campushire-pk1f.onrender.com/students/register",
   userDataWithRole
@@ -73,7 +83,7 @@ function Register() {
         <div className="p-6 md:p-10 lg:p-14">
 
           <h2
-            className="text-5xl font-bold mb-3"
+            className="ext-3xl md:text-5xl font-bold mb-3"
             style={{ color: "#111827" }}
           >
             Create Account
@@ -90,7 +100,28 @@ function Register() {
             className="space-y-4"
             onSubmit={handleSubmit(onUserRegister)}
           >
+            <div>
+  <label className="block mb-2 font-medium">
+    Register As
+  </label>
 
+  <select
+    value={role}
+    onChange={(e) => setRole(e.target.value)}
+    className="w-full border-2 rounded-xl px-5 py-3"
+  >
+    <option value="student">Student</option>
+    <option value="admin">Admin</option>
+  </select>
+</div>
+{role === "admin" && (
+  <input
+    type="password"
+    placeholder="Admin Secret Code"
+    className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+    {...register("secretCode")}
+  />
+)}
             <input
               type="text"
               placeholder="Full Name"
@@ -139,26 +170,30 @@ function Register() {
               </p>
             )}
 
-            <input
-              type="text"
-              placeholder="Branch"
-              className="w-full border-2 rounded-xl px-5 py-3 outline-none"
-              style={{ borderColor: "#E5E7EB" }}
-              {...register("branch", {
-                required: "Branch is required",
-              })}
-            />
+            {role === "student" && (
+  <>
+    <input
+      type="text"
+      placeholder="Branch"
+      className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+      style={{ borderColor: "#E5E7EB" }}
+      {...register("branch", {
+        required: "Branch is required",
+      })}
+    />
 
-            <input
-              type="number"
-              step="0.01"
-              placeholder="CGPA"
-              className="w-full border-2 rounded-xl px-5 py-3 outline-none"
-              style={{ borderColor: "#E5E7EB" }}
-              {...register("cgpa", {
-                required: "CGPA is required",
-              })}
-            />
+    <input
+      type="number"
+      step="0.01"
+      placeholder="CGPA"
+      className="w-full border-2 rounded-xl px-5 py-3 outline-none"
+      style={{ borderColor: "#E5E7EB" }}
+      {...register("cgpa", {
+        required: "CGPA is required",
+      })}
+    />
+  </>
+)}
 
             <button
               type="submit"

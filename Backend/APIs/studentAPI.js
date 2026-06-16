@@ -22,7 +22,14 @@ studentApp.get("/", async (req, res) => {
 
 // REGISTER student
 studentApp.post("/register", async (req, res) => {
-
+if (
+  req.body.role === "admin" &&
+  req.body.secretCode !== "CAMPUSHIRE2026"
+) {
+  return res.status(401).json({
+    message: "Invalid Admin Secret Code"
+  });
+}
   // hash password
 const hashedPassword = await bcrypt.hash(
     req.body.password,
@@ -31,7 +38,7 @@ const hashedPassword = await bcrypt.hash(
 
 // replace plain password
 req.body.password = hashedPassword;
-
+delete req.body.secretCode;
 const newStudent = new Student(req.body); 
 
     const student = await newStudent.save();
