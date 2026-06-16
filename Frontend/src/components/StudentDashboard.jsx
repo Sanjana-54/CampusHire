@@ -92,30 +92,7 @@ console.log(
           Welcome Back, {user?.name} 👋
         </h1>
 
-        <div className="flex gap-4 mt-5">
-
-          <button
-            onClick={() => navigate("/companies")}
-            className="px-5 py-3 rounded-xl text-white font-semibold"
-            style={{
-              background:
-                "linear-gradient(90deg,#4C2F9E,#FF7043)",
-            }}
-          >
-            View Companies
-          </button>
-
-          <button
-            onClick={() => navigate("/applications")}
-            className="px-5 py-3 rounded-xl  text-white font-semibold"
-            style={{
-              background: "linear-gradient(90deg,#4C2F9E,#FF7043)",
-            }}
-          >
-            My Applications
-          </button>
-
-        </div>
+        
 
         <p className="text-violet-100 mt-3">
           Track your placements and applications.
