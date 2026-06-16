@@ -5,6 +5,7 @@ function Navbar() {
  const user = JSON.parse(
   localStorage.getItem("user")
 );
+console.log("NAVBAR VERSION 123");
 console.log("Navbar User:", user);
 console.log(
   "Navbar localStorage:",
