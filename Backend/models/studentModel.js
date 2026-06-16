@@ -19,11 +19,13 @@ const studentSchema = new Schema({
     },
 
     branch:{
-        type:String
+        type:String,
+        default:null
     }, 
 
     cgpa:{
-        type:Number
+        type:Number,
+        default:null
     },
 
     role:{
