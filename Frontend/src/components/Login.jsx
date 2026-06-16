@@ -109,14 +109,25 @@ err.response?.data?.message ||
     Login As
   </label>
 
+<div className="relative">
   <select
     value={role}
     onChange={(e) => setRole(e.target.value)}
-    className="w-full border-2 rounded-xl px-5 py-3 pr-20 outline-none">
+    className="w-full border-2 rounded-xl px-5 py-3 pr-16 outline-none appearance-none bg-white"
+  >
     <option value="student">Student</option>
     <option value="admin">Admin</option>
   </select>
+
+  <span
+    className="absolute right-5 top-1/2 -translate-y-1/2 text-2xl font-bold pointer-events-none"
+  >
+    ▼
+  </span>
 </div>
+  </div>
+   
+
           <form
             className="space-y-5"
             onSubmit={handleSubmit(onUserLogin)}
