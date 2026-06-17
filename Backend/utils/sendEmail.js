@@ -1,17 +1,4 @@
-import nodemailer from "nodemailer";
-
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
-
-const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+import axios from "axios";
 
 export const sendEmail = async (
   to,
@@ -19,15 +6,34 @@ export const sendEmail = async (
   text
 ) => {
   try {
-    await transporter.sendMail({
-  from: "campushire.tpo@gmail.com",
-  to,
-  subject,
-  text,
-});
+    const response = await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        sender: {
+          name: "CampusHire",
+          email: "campushire.tpo@gmail.com",
+        },
+        to: [
+          {
+            email: to,
+          },
+        ],
+        subject,
+        textContent: text,
+      },
+      {
+        headers: {
+          "api-key": process.env.BREVO_API_KEY,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-   console.log("Email sent successfully to:", to);
+    console.log("Email sent:", response.data);
   } catch (err) {
-    console.log("Email error full:", err);
+    console.log(
+      "Brevo API Error:",
+      err.response?.data || err.message
+    );
   }
 };

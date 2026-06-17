@@ -43,7 +43,7 @@ delete req.body.secretCode;
 const newStudent = new Student(req.body); 
 
    const student = await newStudent.save();
-   sendEmail(
+   await sendEmail(
   student.email,
   "CampusHire Registration",
   `Hello ${student.name},
