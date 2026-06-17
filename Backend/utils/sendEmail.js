@@ -5,6 +5,11 @@ export const sendEmail = async (
   subject,
   text
 ) => {
+     console.log(
+    "BREVO_API_KEY exists:",
+    !!process.env.BREVO_API_KEY
+  );
+
   try {
     const response = await axios.post(
       "https://api.brevo.com/v3/smtp/email",
