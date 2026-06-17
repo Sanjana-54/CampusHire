@@ -5,6 +5,7 @@ import Company from "../models/companyModel.js";
 import jwt from "jsonwebtoken";
 import { verifyToken } from "../middlewares/verifyToken.js";
 import bcrypt from "bcryptjs";
+import { sendEmail } from "../utils/sendEmail.js";
 
 const studentApp = exp.Router();
 
@@ -41,8 +42,16 @@ req.body.password = hashedPassword;
 delete req.body.secretCode;
 const newStudent = new Student(req.body); 
 
-    const student = await newStudent.save();
+   const student = await newStudent.save();
+   sendEmail(
+  student.email,
+  "CampusHire Registration",
+  `Hello ${student.name},
 
+Your account has been created successfully.
+
+Welcome to CampusHire!`
+);
    res.status(201).json({
     message:
       student.role === "admin"
