@@ -220,6 +220,9 @@ function AdminDashboard() {
 
           <input
             type="number"
+            step="0.1"
+           min="0"
+           max="10"
             placeholder="Minimum CGPA"
             {...register("minCGPA")}
             className="border border-slate-300 rounded-xl px-4 py-3"
