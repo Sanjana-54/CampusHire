@@ -12,7 +12,7 @@ const studentApp = exp.Router();
 // GET all students
 studentApp.get("/", async (req, res) => {
 
-    const students = await Student.find();
+    const students = await Student.find({role:"student"});
 
     res.status(200).json({
         message: "Students fetched successfully",

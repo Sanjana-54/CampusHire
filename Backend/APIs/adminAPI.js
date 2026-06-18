@@ -10,7 +10,7 @@ const adminApp = exp.Router();
 // GET all students
 adminApp.get("/students", verifyToken("admin"),async (req, res) => {
 
-    const students = await Student.find();
+    const students = await Student.find({ role: "student" });
 
     res.status(200).json({
         message: "All students fetched successfully",
