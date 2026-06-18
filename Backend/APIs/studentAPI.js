@@ -280,4 +280,42 @@ studentApp.get(
   }
 );
 
+studentApp.get(
+  "/application-progress/:id",
+  verifyToken("student"),
+  async (req, res) => {
+
+    const studentId = req.params.id;
+
+    const applied = await Application.countDocuments({
+      studentId,
+      status: "Applied"
+    });
+
+    const shortlisted = await Application.countDocuments({
+      studentId,
+      status: "Shortlisted"
+    });
+
+    const selected = await Application.countDocuments({
+      studentId,
+      status: "Selected"
+    });
+
+    const rejected = await Application.countDocuments({
+      studentId,
+      status: "Rejected"
+    });
+
+    res.status(200).json({
+      payload: {
+        applied,
+        shortlisted,
+        selected,
+        rejected
+      }
+    });
+
+  }
+);
 export default studentApp;

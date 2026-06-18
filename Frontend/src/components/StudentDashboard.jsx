@@ -10,12 +10,12 @@ function StudentDashboard() {
   const user = JSON.parse(
     localStorage.getItem("user")
   );
-  console.log("DASHBOARD FILE CHECK");
+  /*console.log("DASHBOARD FILE CHECK");
 console.log("Dashboard User:", user);
 console.log(
   "Dashboard localStorage:",
   localStorage.getItem("user")
-);
+);*/
   const [stats, setStats] = useState({
     eligibleCompanies: 0,
     applications: 0,
@@ -23,6 +23,14 @@ console.log(
   });
 
   const [applications, setApplications] = useState([]);
+  const [progress, setProgress] = useState({
+  applied: 0,
+  shortlisted: 0,
+  selected: 0,
+  rejected: 0
+});
+const [upcomingDrives, setUpcomingDrives] =
+useState([]);
 
   const getDashboardStats = async () => {
 
@@ -66,13 +74,57 @@ console.log(
 
   };
 
+  const getApplicationProgress = async () => {
+
+  try {
+
+    const res = await axios.get(
+      `https://campushire-pk1f.onrender.com/students/application-progress/${user._id}`,
+      {
+        withCredentials: true
+      }
+    );
+
+    setProgress(res.data.payload);
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+
+};
+
+const getUpcomingDrives = async () => {
+
+  try {
+
+    const res = await axios.get(
+      `https://campushire-pk1f.onrender.com/students/eligible-companies/${user._id}`,
+      {
+        withCredentials: true
+      }
+    );
+
+    setUpcomingDrives(
+      res.data.payload.slice(0, 5)
+    );
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+
+};
   useEffect(() => {
 
     document.title = "CampusHire | Dashboard";
 
     getDashboardStats();
     getRecentApplications();
-
+    getApplicationProgress();
+    getUpcomingDrives();
   }, []);
 
   return (
@@ -155,7 +207,92 @@ console.log(
         </div>
 
       </div>
+      <div className="mt-8">
 
+  <h2
+    className="text-2xl font-bold mb-4"
+    style={{ color: "#2D1B69" }}
+  >
+    Application Progress
+  </h2>
+
+  <div className="grid md:grid-cols-4 gap-6">
+
+    <div className="rounded-3xl p-6 text-white bg-blue-500">
+      <h3 className="text-lg">Applied</h3>
+      <p className="text-4xl font-bold mt-2">
+        {progress.applied}
+      </p>
+    </div>
+
+    <div className="rounded-3xl p-6 text-white bg-yellow-500">
+      <h3 className="text-lg">Shortlisted</h3>
+      <p className="text-4xl font-bold mt-2">
+        {progress.shortlisted}
+      </p>
+    </div>
+
+    <div className="rounded-3xl p-6 text-white bg-green-500">
+      <h3 className="text-lg">Selected</h3>
+      <p className="text-4xl font-bold mt-2">
+        {progress.selected}
+      </p>
+    </div>
+
+    <div className="rounded-3xl p-6 text-white bg-red-500">
+      <h3 className="text-lg">Rejected</h3>
+      <p className="text-4xl font-bold mt-2">
+        {progress.rejected}
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<div className="mt-8">
+
+  <h2
+    className="text-2xl font-bold mb-4"
+    style={{ color: "#2D1B69" }}
+  >
+    Upcoming Drives
+  </h2>
+
+  <div className="grid md:grid-cols-2 gap-6">
+
+    {upcomingDrives.map((company) => (
+
+      <div
+        key={company._id}
+        className="rounded-3xl p-6 text-white"
+        style={{
+          background:
+            "linear-gradient(135deg,#4C2F9E,#FF7043)"
+        }}
+      >
+
+        <h3 className="text-2xl font-bold">
+          {company.companyName}
+        </h3>
+
+        <p className="mt-2">
+          Package: {company.package} LPA
+        </p>
+
+        <p className="mt-2">
+          Drive Date:
+          {" "}
+          {company.driveDate?.slice(0,10)}
+        </p>
+
+      </div>
+
+    ))}
+
+  </div>
+
+</div>
       {/* Recent Applications */}
 
       <div>
