@@ -4,10 +4,8 @@ import RootLayout from "./components/RootLayout";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import StudentDashboard from "./components/StudentDashboard";
-//import AdminDashboard from "./components/AdminDashboard";
 import Companies from "./components/Companies";
 import Applications from "./components/Applications";
-//import AdminApplications from "./components/AdminApplications";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminDashboardPage from "./components/admin/Dashboard";
 import AdminCompaniesPage from "./components/admin/Companies";
@@ -43,14 +41,7 @@ function App() {
   )
 },
 
-       /* {
-  path: "admin-dashboard",
-  element: (
-    <ProtectedRoute allowedRole="admin">
-      <AdminDashboard />
-    </ProtectedRoute>
-  )
-},*/
+       
        {
   path: "companies",
   element: (
@@ -67,14 +58,7 @@ function App() {
     </ProtectedRoute>
   )
 },
-/*{
-  path: "admin-applications",
-  element: (
-    <ProtectedRoute allowedRole="admin">
-      <AdminApplications />
-    </ProtectedRoute>
-  )
-},*/
+
 {
   path: "admin/dashboard",
   element: (

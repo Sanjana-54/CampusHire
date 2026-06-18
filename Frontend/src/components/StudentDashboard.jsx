@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import StudentSidebar from "./StudentSidebar";
 
 function StudentDashboard() {
 
@@ -76,7 +77,11 @@ console.log(
 
   return (
 
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="min-h-screen bg-slate-100">
+
+  <StudentSidebar />
+
+  <div className="md:ml-64 p-6">
 
       {/* Welcome Section */}
 
@@ -220,7 +225,7 @@ console.log(
       </div>
 
     </div>
-
+</div>
   );
 
 }
