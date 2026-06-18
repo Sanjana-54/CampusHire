@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
+
 import StudentSidebar from "./StudentSidebar";
 
 function StudentDashboard() {
 
-  const navigate = useNavigate();
+ 
 
   const user = JSON.parse(
     localStorage.getItem("user")
@@ -32,6 +32,7 @@ console.log(
 const [upcomingDrives, setUpcomingDrives] =
 useState([]);
 
+s
   const getDashboardStats = async () => {
 
     try {
@@ -106,9 +107,14 @@ const getUpcomingDrives = async () => {
       }
     );
 
-    setUpcomingDrives(
-      res.data.payload.slice(0, 5)
-    );
+   setUpcomingDrives(
+  res.data.payload
+    .filter(
+      company =>
+        new Date(company.driveDate) >= new Date()
+    )
+    .slice(0, 5)
+);
 
   } catch (err) {
 
@@ -207,7 +213,7 @@ const getUpcomingDrives = async () => {
         </div>
 
       </div>
-      <div className="mt-8">
+     <div className="mt-8">
 
   <h2
     className="text-2xl font-bold mb-4"
@@ -215,39 +221,45 @@ const getUpcomingDrives = async () => {
   >
     Application Progress
   </h2>
+<div className="grid md:grid-cols-4 gap-6">
 
-  <div className="grid md:grid-cols-4 gap-6">
-
-    <div className="rounded-3xl p-6 text-white bg-blue-500">
-      <h3 className="text-lg">Applied</h3>
-      <p className="text-4xl font-bold mt-2">
-        {progress.applied}
-      </p>
-    </div>
-
-    <div className="rounded-3xl p-6 text-white bg-yellow-500">
-      <h3 className="text-lg">Shortlisted</h3>
-      <p className="text-4xl font-bold mt-2">
-        {progress.shortlisted}
-      </p>
-    </div>
-
-    <div className="rounded-3xl p-6 text-white bg-green-500">
-      <h3 className="text-lg">Selected</h3>
-      <p className="text-4xl font-bold mt-2">
-        {progress.selected}
-      </p>
-    </div>
-
-    <div className="rounded-3xl p-6 text-white bg-red-500">
-      <h3 className="text-lg">Rejected</h3>
-      <p className="text-4xl font-bold mt-2">
-        {progress.rejected}
-      </p>
-    </div>
-
+  <div className="rounded-3xl p-6 bg-blue-100 shadow-sm">
+    <h3 className="text-blue-700 font-semibold">
+      Applied
+    </h3>
+    <p className="text-4xl font-bold text-blue-800 mt-2">
+      {progress.applied}
+    </p>
   </div>
 
+  <div className="rounded-3xl p-6 bg-amber-100 shadow-sm">
+    <h3 className="text-amber-700 font-semibold">
+      Shortlisted
+    </h3>
+    <p className="text-4xl font-bold text-amber-800 mt-2">
+      {progress.shortlisted}
+    </p>
+  </div>
+
+  <div className="rounded-3xl p-6 bg-green-100 shadow-sm">
+    <h3 className="text-green-700 font-semibold">
+      Selected
+    </h3>
+    <p className="text-4xl font-bold text-green-800 mt-2">
+      {progress.selected}
+    </p>
+  </div>
+
+  <div className="rounded-3xl p-6 bg-red-100 shadow-sm">
+    <h3 className="text-red-700 font-semibold">
+      Rejected
+    </h3>
+    <p className="text-4xl font-bold text-red-800 mt-2">
+      {progress.rejected}
+    </p>
+  </div>
+
+</div>
 </div>
 
 <div className="mt-8">
@@ -265,26 +277,21 @@ const getUpcomingDrives = async () => {
 
       <div
         key={company._id}
-        className="rounded-3xl p-6 text-white"
-        style={{
-          background:
-            "linear-gradient(135deg,#4C2F9E,#FF7043)"
-        }}
+       className="bg-white rounded-3xl p-6 shadow-md hover:shadow-lg transition"
+        
       >
 
-        <h3 className="text-2xl font-bold">
-          {company.companyName}
-        </h3>
+        <h3 className="text-2xl font-bold text-slate-800">
+  {company.companyName}
+</h3>
 
-        <p className="mt-2">
-          Package: {company.package} LPA
-        </p>
+<p className="mt-3 text-slate-600">
+  Package: {company.package} LPA
+</p>
 
-        <p className="mt-2">
-          Drive Date:
-          {" "}
-          {company.driveDate?.slice(0,10)}
-        </p>
+<p className="mt-2 text-slate-600">
+  Drive Date: {company.driveDate?.slice(0,10)}
+</p>
 
       </div>
 
@@ -295,7 +302,7 @@ const getUpcomingDrives = async () => {
 </div>
       {/* Recent Applications */}
 
-      <div>
+      <div className="mt-10">
 
         <h2
           className="text-2xl font-bold mb-4"
@@ -318,7 +325,7 @@ const getUpcomingDrives = async () => {
 
               <div
                 key={application._id}
-                className="flex justify-between mb-4"
+                className="flex justify-between items-center mb-4"
               >
 
                 <div>
