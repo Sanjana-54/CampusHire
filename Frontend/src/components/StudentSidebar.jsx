@@ -2,30 +2,71 @@ import { NavLink } from "react-router";
 
 function StudentSidebar() {
   return (
-    <div className="fixed left-0 top-0 h-screen w-64 bg-white shadow-lg p-6">
+    <div className="bg-white shadow-lg h-screen w-56 fixed left-0 top-0 hidden md:flex flex-col">
+      
+      {/* Logo */}
+      <div className="p-6 border-b">
+        <h1
+          className="text-3xl font-bold"
+          style={{
+            background:
+              "linear-gradient(90deg,#4C2F9E,#FF7043)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          CampusHire
+        </h1>
+      </div>
 
-      <h1 className="text-2xl font-bold mb-10">
-        CampusHire
-      </h1>
+      {/* Menu */}
+      <div className="flex flex-col p-4 gap-3">
 
-      <nav className="flex flex-col gap-4">
-
-        <NavLink to="/student-dashboard">
-          Dashboard
+        <NavLink
+          to="/student-dashboard"
+          className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium"
+        >
+          📊 Dashboard
         </NavLink>
 
-        <NavLink to="/companies">
-          Companies
+        <NavLink
+          to="/companies"
+          className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium"
+        >
+          🏢 Companies
         </NavLink>
 
-        <NavLink to="/applications">
-          Applications
+        
+
+        <NavLink
+          to="/applications"
+          className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium"
+        >
+          📄 Applications
         </NavLink>
+      </div>
 
-      </nav>
-
+      {/* Logout */}
+      <div className="mt-auto p-4 border-t">
+        <button
+          className="w-full text-white py-3 rounded-xl"
+          style={{
+            background:
+              "linear-gradient(90deg,#4C2F9E,#FF7043)",
+          }}
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = "/";
+          }}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
+
+
+
 
 export default StudentSidebar;
