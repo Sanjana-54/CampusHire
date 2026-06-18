@@ -70,7 +70,7 @@ const navStyle = ({ isActive }) => ({
 
           {user?.role === "admin" && (
             <>
-              <NavLink to="/admin-dashboard" style={navStyle}>
+              <NavLink to="/admin/dashboard" style={navStyle}>
   Dashboard
 </NavLink>
 

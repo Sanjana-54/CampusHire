@@ -1,7 +1,12 @@
 import Navbar from "./Navbar";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 
 function RootLayout() {
+  const location = useLocation();
+
+  const isAdminPage =
+    location.pathname.startsWith("/admin");
+
   return (
     <div
       className="min-h-screen"
@@ -9,9 +14,9 @@ function RootLayout() {
         backgroundColor: "#F9F8FF",
       }}
     >
-      <Navbar />
+      {!isAdminPage && <Navbar />}
 
-      <div >
+      <div>
         <Outlet />
       </div>
     </div>

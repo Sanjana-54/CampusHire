@@ -42,7 +42,7 @@ localStorage.setItem(
 toast.success("Login Successful");
 
 if (user.role === "admin") {
-  navigate("/admin-dashboard");
+  navigate("/admin/dashboard");
 } else {
   navigate("/student-dashboard");
 }
