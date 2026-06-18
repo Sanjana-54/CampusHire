@@ -32,7 +32,7 @@ console.log(
 const [upcomingDrives, setUpcomingDrives] =
 useState([]);
 
-s
+
   const getDashboardStats = async () => {
 
     try {
