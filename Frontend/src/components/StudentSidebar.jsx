@@ -42,14 +42,15 @@ function StudentSidebar() {
         >
           📄 Applications
         </NavLink>
-      </div>
+      
        
        <NavLink
-  to="/profile"
-  className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium"
->
-  👤 Profile
-</NavLink>
+          to="/profile"
+          className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium"
+       >
+            👤 Profile
+     </NavLink>
+     </div>
 
       {/* Logout */}
       <div className="mt-auto p-4 border-t">
