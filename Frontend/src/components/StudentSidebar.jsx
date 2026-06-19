@@ -6,17 +6,15 @@ function StudentSidebar() {
       
       {/* Logo */}
       <div className="p-6 border-b">
-        <h1
-          className="text-3xl font-bold"
-          style={{
-            background:
-              "linear-gradient(90deg,#4C2F9E,#FF7043)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          CampusHire
-        </h1>
+        <h1 className="text-3xl font-bold">
+  <span style={{ color: "#2D1B69" }}>
+    Campus
+  </span>
+
+  <span style={{ color: "#FF7043" }}>
+    Hire
+  </span>
+</h1>
       </div>
 
       {/* Menu */}
