@@ -11,6 +11,9 @@ function Students() {
   useState("high");
   const [selectedStudent, setSelectedStudent] =
     useState(null);
+const [studentToDelete,
+setStudentToDelete] =
+useState(null);
 
   const getStudents = async () => {
 
@@ -34,13 +37,6 @@ function Students() {
   };
 
   const deleteStudent = async (id) => {
-
-    const confirmDelete =
-      window.confirm(
-        "Delete this student?"
-      );
-
-    if (!confirmDelete) return;
 
     try {
 
@@ -256,18 +252,13 @@ style={{
                         </button>
 
                         <button
-                         className="text-white px-3 py-1 rounded-lg transition"
-style={{
-  background: "#FF7043"
-}}
-                         onClick={() =>
-                            deleteStudent(
-                              student._id
-                            )
-                          }
-                        >
-                          Delete
-                        </button>
+  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
+  onClick={() =>
+    setStudentToDelete(student)
+  }
+>
+  Delete
+</button>
 
                       </td>
 
@@ -296,7 +287,7 @@ style={{
 
       </div>
 
-      {selectedStudent && (
+            {selectedStudent && (
 
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
 
@@ -308,35 +299,35 @@ style={{
 
             <div className="space-y-3 text-slate-700">
 
-  <p>
-    <strong>Name:</strong> {selectedStudent.name}
-  </p>
+              <p>
+                <strong>Name:</strong> {selectedStudent.name}
+              </p>
 
-  <p>
-    <strong>Email:</strong> {selectedStudent.email}
-  </p>
+              <p>
+                <strong>Email:</strong> {selectedStudent.email}
+              </p>
 
-  <p>
-    <strong>Branch:</strong> {selectedStudent.branch}
-  </p>
+              <p>
+                <strong>Branch:</strong> {selectedStudent.branch}
+              </p>
 
-  <p>
-    <strong>CGPA:</strong> {selectedStudent.cgpa}
-  </p>
+              <p>
+                <strong>CGPA:</strong> {selectedStudent.cgpa}
+              </p>
 
-  <p>
-    <strong>Role:</strong> {selectedStudent.role}
-  </p>
+              <p>
+                <strong>Role:</strong> {selectedStudent.role}
+              </p>
 
-</div>
+            </div>
 
             <button
-             className="mt-5 text-white px-4 py-2 rounded-lg"
-style={{
-  background:
-    "linear-gradient(90deg,#4C2F9E,#FF7043)"
-}}
-             onClick={() =>
+              className="mt-5 text-white px-4 py-2 rounded-lg"
+              style={{
+                background:
+                  "linear-gradient(90deg,#4C2F9E,#FF7043)"
+              }}
+              onClick={() =>
                 setSelectedStudent(null)
               }
             >
@@ -349,10 +340,66 @@ style={{
 
       )}
 
+      {studentToDelete && (
+
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+          <div className="bg-white rounded-2xl p-6 w-[380px]">
+
+            <h2 className="text-xl font-bold mb-3">
+              Delete Student
+            </h2>
+
+            <p className="text-slate-600">
+              Are you sure you want to delete
+              <strong>
+                {" "}
+                {studentToDelete.name}
+              </strong>
+              ?
+            </p>
+
+            <div className="flex justify-end gap-3 mt-6">
+
+              <button
+                className="px-4 py-2 rounded-lg border"
+                onClick={() =>
+                  setStudentToDelete(null)
+                }
+              >
+                Cancel
+              </button>
+
+              <button
+                className="px-4 py-2 rounded-lg bg-red-500 text-white"
+                onClick={() => {
+
+                  deleteStudent(
+                    studentToDelete._id
+                  );
+
+                  setStudentToDelete(null);
+
+                }}
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
     </div>
 
   );
 
 }
+
+
+          
 
 export default Students;

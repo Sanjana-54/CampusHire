@@ -16,7 +16,7 @@ function Companies() {
   const [companies, setCompanies] = useState([]);
   const [eligibleStudents, setEligibleStudents] =
   useState([]);
-  
+  const [search, setSearch] = useState("");
   // Fetch companies
   const getCompanies = async () => {
 
@@ -128,6 +128,7 @@ await axios.post(
 
   getCompanies();
 }, []);
+
   return (
     <div className="min-h-screen bg-slate-100">
     <Sidebar />
@@ -295,6 +296,16 @@ style={{
 
   <div className="bg-white rounded-2xl p-6 mt-6">
 
+<input
+  type="text"
+  placeholder="Search eligible student..."
+  value={search}
+  onChange={(e) =>
+    setSearch(e.target.value)
+  }
+  className="w-full border rounded-xl p-3 mb-4"
+/>
+
     <h2 className="text-2xl font-bold mb-5">
       Eligible Students
     </h2>
@@ -327,28 +338,81 @@ style={{
 
       <tbody>
 
-        {eligibleStudents.map(student => (
+        {eligibleStudents
+  .filter(student =>
+  student.name
+    .toLowerCase()
+    .includes(search.toLowerCase()) ||
+
+  student.email
+    .toLowerCase()
+    .includes(search.toLowerCase())
+)
+.map(student => (
 
           <tr
             key={student._id}
             className="border-b"
           >
 
-            <td className="py-3">
-              {student.name}
-            </td>
+           <td className="py-3">
+
+  <div className="flex items-center gap-3">
+
+    <div
+      className="
+      w-10
+      h-10
+      rounded-full
+      bg-gradient-to-r
+      from-indigo-500
+      to-purple-500
+      text-white
+      flex
+      items-center
+      justify-center
+      font-bold"
+    >
+      {student.name?.charAt(0).toUpperCase()}
+    </div>
+
+    <span>{student.name}</span>
+
+  </div>
+
+</td>
 
             <td>
               {student.email}
             </td>
 
             <td>
-              {student.branch}
-            </td>
+
+  <span className="
+    bg-blue-100
+    text-blue-700
+    px-3
+    py-1
+    rounded-full
+  ">
+    {student.branch}
+  </span>
+
+</td>
 
             <td>
-              {student.cgpa}
-            </td>
+
+  <span className="
+    bg-green-100
+    text-green-700
+    px-3
+    py-1
+    rounded-full
+  ">
+    {student.cgpa}
+  </span>
+
+</td>
 
           </tr>
 
