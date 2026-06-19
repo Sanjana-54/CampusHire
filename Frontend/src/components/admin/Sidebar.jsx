@@ -15,7 +15,13 @@ function Sidebar() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          CampusHire
+          <span style={{ color: "#2D1B69" }}>
+            Campus
+          </span>
+
+          <span style={{ color: "#FF7043" }}>
+            Hire
+            </span>
         </h1>
       </div>
 
