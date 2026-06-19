@@ -9,9 +9,11 @@ function RootLayout() {
     location.pathname.startsWith("/admin");
 
   const isStudentPage =
-    location.pathname === "/student-dashboard" ||
-    location.pathname === "/companies" ||
-    location.pathname === "/applications";
+    
+  location.pathname === "/student-dashboard" ||
+  location.pathname === "/companies" ||
+  location.pathname === "/applications" ||
+  location.pathname === "/profile";
 
   return (
     <div
