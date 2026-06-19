@@ -151,6 +151,31 @@ adminApp.patch("/update-status/:id", verifyToken("admin"),async (req, res) => {
 
 });
 
+// UPDATE APPLICATION ROUND
+adminApp.put(
+  "/application-round/:id",
+  verifyToken("admin"),
+  async (req, res) => {
+
+    const updatedApplication =
+      await Application.findByIdAndUpdate(
+        req.params.id,
+        {
+          round: req.body.round
+        },
+        {
+          new: true
+        }
+      );
+
+    res.status(200).json({
+      message: "Application round updated successfully",
+      payload: updatedApplication
+    });
+
+  }
+);
+
 adminApp.get(
 "/dashboard-stats",
 verifyToken("admin"),
