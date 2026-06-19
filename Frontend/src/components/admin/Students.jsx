@@ -117,7 +117,10 @@ const sortedStudents =
             Students
           </h2>
         
-       <p className="text-slate-500 mb-5">
+      <p
+  className="mb-5 font-medium"
+  style={{ color: "#4C2F9E" }}
+>
   Total Students: {filteredStudents.length}
 </p>
           <div className="flex gap-4 mb-6">
@@ -129,7 +132,7 @@ const sortedStudents =
     onChange={(e) =>
       setSearch(e.target.value)
     }
-    className="flex-1 border rounded-xl p-3 outline-none"
+    className="flex-1 border-2 border-violet-200 rounded-xl p-3 outline-none focus:border-violet-500"
   />
 
   <select
@@ -156,7 +159,10 @@ const sortedStudents =
 
               <thead>
 
-                <tr className="border-b">
+                <tr
+  className="border-b"
+  style={{ color: "#2D1B69" }}
+>
 
                   <th className="text-left py-3">
                     Name
@@ -187,10 +193,10 @@ const sortedStudents =
                 {sortedStudents.map(
                   (student) => (
 
-                    <tr
-                      key={student._id}
-                      className="border-b"
-                    >
+                   <tr
+  key={student._id}
+  className="border-b hover:bg-violet-50 transition"
+>
 
                       <td className="py-3">
 
@@ -236,8 +242,11 @@ const sortedStudents =
                       <td className="space-x-2">
 
                         <button
-                          className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg"
-                          onClick={() =>
+ className="text-white px-3 py-1 rounded-lg transition"
+style={{
+  background: "#4C2F9E"
+}}
+ onClick={() =>
                             setSelectedStudent(
                               student
                             )
@@ -247,8 +256,11 @@ const sortedStudents =
                         </button>
 
                         <button
-                          className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
-                          onClick={() =>
+                         className="text-white px-3 py-1 rounded-lg transition"
+style={{
+  background: "#FF7043"
+}}
+                         onClick={() =>
                             deleteStudent(
                               student._id
                             )
@@ -319,8 +331,12 @@ const sortedStudents =
 </div>
 
             <button
-              className="mt-5 bg-slate-800 text-white px-4 py-2 rounded-lg"
-              onClick={() =>
+             className="mt-5 text-white px-4 py-2 rounded-lg"
+style={{
+  background:
+    "linear-gradient(90deg,#4C2F9E,#FF7043)"
+}}
+             onClick={() =>
                 setSelectedStudent(null)
               }
             >
