@@ -293,6 +293,36 @@ const getUpcomingDrives = async () => {
   Drive Date: {company.driveDate?.slice(0,10)}
 </p>
 
+<p className="mt-2 text-orange-600 font-semibold">
+
+  {Math.ceil(
+    (
+      new Date(company.driveDate) -
+      new Date()
+    ) /
+      (1000 * 60 * 60 * 24)
+  ) === 0
+    ? "🚀 Drive Today"
+    : Math.ceil(
+        (
+          new Date(company.driveDate) -
+          new Date()
+        ) /
+          (1000 * 60 * 60 * 24)
+      ) === 1
+    ? "⏳ Drive Tomorrow"
+    : `⏳ ${
+        Math.ceil(
+          (
+            new Date(company.driveDate) -
+            new Date()
+          ) /
+            (1000 * 60 * 60 * 24)
+        )
+      } days left`}
+
+</p>
+
       </div>
 
     ))}

@@ -11,6 +11,7 @@ import AdminDashboardPage from "./components/admin/Dashboard";
 import AdminCompaniesPage from "./components/admin/Companies";
 import AdminStudentsPage from "./components/admin/Students";
 import AdminApplicationsPage from "./components/admin/Applications";
+import Profile from "./components/Profile";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -55,6 +56,14 @@ function App() {
   element: (
     <ProtectedRoute allowedRole="student">
       <Applications />
+    </ProtectedRoute>
+  )
+},
+{
+  path: "profile",
+  element: (
+    <ProtectedRoute allowedRole="student">
+      <Profile />
     </ProtectedRoute>
   )
 },

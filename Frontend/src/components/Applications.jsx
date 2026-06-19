@@ -81,9 +81,63 @@ function Applications() {
                 {application.companyId?.companyName}
               </h2>
 
-              <p className="text-gray-500 mt-1">
-                Round: {application.round}
-              </p>
+              <div className="mt-3">
+
+  <div className="flex items-center gap-2 text-xs">
+
+    <div
+      className={`w-3 h-3 rounded-full ${
+        application.round === "Round 1" ||
+        application.round === "Round 2" ||
+        application.round === "Technical" ||
+        application.round === "HR"
+          ? "bg-green-500"
+          : "bg-gray-300"
+      }`}
+    />
+
+    <div className="w-10 h-1 bg-gray-300" />
+
+    <div
+      className={`w-3 h-3 rounded-full ${
+        application.round === "Round 2" ||
+        application.round === "Technical" ||
+        application.round === "HR"
+          ? "bg-green-500"
+          : "bg-gray-300"
+      }`}
+    />
+
+    <div className="w-10 h-1 bg-gray-300" />
+
+    <div
+      className={`w-3 h-3 rounded-full ${
+        application.round === "Technical" ||
+        application.round === "HR"
+          ? "bg-green-500"
+          : "bg-gray-300"
+      }`}
+    />
+
+    <div className="w-10 h-1 bg-gray-300" />
+
+    <div
+      className={`w-3 h-3 rounded-full ${
+        application.status === "Selected"
+          ? "bg-green-500"
+          : application.status === "Rejected"
+          ? "bg-red-500"
+          : "bg-gray-300"
+      }`}
+    />
+
+  </div>
+
+  <p className="text-gray-500 mt-2">
+    Current Round: {application.round}
+  </p>
+
+</div>
 
               <p className="text-gray-500">
                 {new Date(

@@ -6,6 +6,8 @@ import StudentSidebar from "./StudentSidebar";
 function Companies() {
 
   const [companies, setCompanies] = useState([]);
+const [appliedCompanies, setAppliedCompanies] =
+  useState([]);
 
   useEffect(() => {
 
@@ -25,7 +27,16 @@ function Companies() {
         );
         console.log(res.data);
         setCompanies(res.data.payload);
+       const appRes = await axios.get(
+  `https://campushire-pk1f.onrender.com/students/applications/${student._id}`,
+  {
+    withCredentials: true,
+  }
+);
 
+setAppliedCompanies(
+  appRes.data.appliedCompanyIds
+);
       } catch (err) {
 
         console.log(err);
@@ -56,9 +67,14 @@ function Companies() {
 
         {companies.map((company) => (
           <CompanyCard
-            key={company._id}
-            company={company}
-          />
+  key={company._id}
+  company={company}
+  alreadyApplied={
+    appliedCompanies.includes(
+      company._id
+    )
+  }
+/>
         ))}
 
       </div>

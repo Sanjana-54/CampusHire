@@ -167,19 +167,29 @@ studentApp.post("/apply", verifyToken("student"), async (req, res) => {
 });
 
 // GET ALL APPLICATIONS
-studentApp.get("/applications/:studentId", verifyToken("student"), async (req, res) => {
+studentApp.get(
+  "/applications/:studentId",
+  verifyToken("student"),
+  async (req, res) => {
 
     const applications = await Application.find({
-        studentId: req.params.studentId
+      studentId: req.params.studentId
     })
     .populate("companyId");
 
+    const appliedCompanyIds =
+      applications.map(
+        app => app.companyId?._id.toString()
+      );
+
     res.status(200).json({
-        message: "Applications fetched successfully",
-        payload: applications
+      message: "Applications fetched successfully",
+      payload: applications,
+      appliedCompanyIds
     });
 
-});
+  }
+);
 
 // GET ELIGIBLE COMPANIES
 studentApp.get("/eligible-companies/:id", verifyToken("student"),async (req, res) => {
