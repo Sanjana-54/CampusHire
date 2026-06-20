@@ -184,26 +184,34 @@ studentApp.get(
 );
 
 // GET ELIGIBLE COMPANIES
-studentApp.get("/eligible-companies/:id", verifyToken("student"),async (req, res) => {
+studentApp.get(
+  "/eligible-companies/:id",
+  verifyToken("student"),
+  async (req, res) => {
 
-    // get student
-    const student = await Student.findById(req.params.id);
+    const student =
+      await Student.findById(req.params.id);
 
-    // filter companies
-   const companies = await Company.find({
-    minCGPA: { $lte: student.cgpa },
-    allowedBranches: { $in: [student.branch] }
-});
+    console.log("Student:", student);
+
+    const companies =
+      await Company.find({
+        minCGPA: { $lte: student.cgpa },
+        allowedBranches: {
+          $in: [student.branch]
+        }
+      });
+
+    console.log("Companies Found:", companies);
 
     res.status(200).json({
-
-        message: "Eligible companies fetched successfully",
-
-        payload: companies
-
+      message:
+        "Eligible companies fetched successfully",
+      payload: companies
     });
 
-});
+  }
+);
 
 // GET single student
 studentApp.get("/:id", async (req, res) => {
@@ -246,6 +254,7 @@ studentApp.delete("/:id", async (req, res) => {
 
 });
 
+// GET student's dashboard stats (eligible companies, applications, selected count)
 studentApp.get(
   "/dashboard-stats/:id",
   verifyToken("student"),
@@ -283,6 +292,7 @@ studentApp.get(
   }
 );
 
+// Get student's application status breakdown (applied, shortlisted, selected, rejected)
 studentApp.get(
   "/application-progress/:id",
   verifyToken("student"),
@@ -322,6 +332,7 @@ studentApp.get(
   }
 );
 
+// Update student's own profile info
 studentApp.put(
   "/update-profile/:id",
   verifyToken("student"),
@@ -348,6 +359,7 @@ studentApp.put(
   }
 );
 
+// Get all notifications for a student, newest first
 studentApp.get(
   "/notifications/:id",
   verifyToken("student"),
@@ -367,6 +379,7 @@ studentApp.get(
   }
 );
 
+// Get count of unread notifications for a student
 studentApp.get(
   "/unread-count/:id",
   verifyToken("student"),
@@ -385,6 +398,7 @@ studentApp.get(
   }
 );
 
+// Mark a single notification as read
 studentApp.put(
   "/read-notification/:id",
   verifyToken("student"),
