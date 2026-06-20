@@ -235,6 +235,7 @@ adminApp.put(
   }
 );
 
+// GET overall counts for admin dashboard (students, companies, applications, selected)
 adminApp.get(
 "/dashboard-stats",
 verifyToken("admin"),
@@ -266,6 +267,7 @@ res.status(200).json({
 }
 );
 
+// GET placement percentage analytics
 adminApp.get(
   "/analytics",
   async (req, res) => {
@@ -296,6 +298,7 @@ adminApp.get(
   }
 );
 
+// GET application status breakdown (applied, shortlisted, selected, rejected)
 adminApp.get(
   "/application-analytics",
   verifyToken("admin"),

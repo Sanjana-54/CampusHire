@@ -3,9 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function StudentSidebar() {
-  const [count, setCount] =
-  useState(0);
 
+ const [unreadCount, setUnreadCount] =
+  useState(0);
 useEffect(() => {
 
   const fetchCount =
@@ -40,6 +40,42 @@ useEffect(() => {
 
   return () =>
     clearInterval(interval);
+
+}, []);
+
+useEffect(() => {
+
+  const fetchUnreadCount = async () => {
+
+    try {
+
+      const user = JSON.parse(
+        localStorage.getItem("user")
+      );
+
+      const res = await axios.get(
+        `https://campushire-pk1f.onrender.com/students/notifications/${user._id}`,
+        {
+          withCredentials: true
+        }
+      );
+
+      const unread =
+        res.data.payload.filter(
+          n => !n.isRead
+        ).length;
+
+      setUnreadCount(unread);
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
+
+  };
+
+  fetchUnreadCount();
 
 }, []);
   return (
