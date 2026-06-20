@@ -154,13 +154,11 @@ await axios.post(
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
 
-<input
+          <input
   type="text"
-  placeholder="Role"
-  value={role}
-  onChange={(e) =>
-    setRole(e.target.value)
-  }
+  placeholder="Role (e.g. AI Engineer, Software Engineer, Data Analyst)"
+  {...register("role")}
+  className="border border-slate-300 rounded-xl px-4 py-3"
 />
           <input
             type="number"
@@ -201,7 +199,7 @@ style={{
 }}
           >
             Add Company
-          </button>
+          </button> 
 
         </form>
 
