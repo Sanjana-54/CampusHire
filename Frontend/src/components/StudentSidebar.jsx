@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 function StudentSidebar() {
 
+  const [count, setCount] =
+  useState(0);
  const [unreadCount, setUnreadCount] =
   useState(0);
 useEffect(() => {
