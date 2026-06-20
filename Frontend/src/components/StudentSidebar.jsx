@@ -59,7 +59,7 @@ useEffect(() => {
       </div>
 
       {/* Menu */}
-      <div className="flex flex-col p-4 gap-3">
+      <div className="flex flex-col p-4 gap-2">
 
         <NavLink
           to="/student-dashboard"
@@ -91,29 +91,36 @@ useEffect(() => {
        >
             👤 Profile
      </NavLink>
-     <NavLink
+     
+<NavLink
   to="/notifications"
-  className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium flex justify-between"
+  className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium flex items-center justify-between"
 >
-  <span>
-    🔔 Notifications
-  </span>
+  <div className="flex items-center gap-2">
+    <span>🔔</span>
+    <span>Notifications</span>
+  </div>
 
-  {count > 0 && (
-
+  {unreadCount > 0 && (
     <span
-      className="
-      bg-red-500
-      text-white
-      text-xs
-      px-2
-      rounded-full"
-    >
-      {count}
-    </span>
-
+  className="
+  bg-red-500
+  text-white
+  text-[11px]
+  font-bold
+  w-5
+  h-5
+  flex
+  items-center
+  justify-center
+  rounded-full
+  "
+>
+  {unreadCount}
+</span>
   )}
 </NavLink>
+  
      </div>
 
       {/* Logout */}
