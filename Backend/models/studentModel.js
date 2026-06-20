@@ -28,7 +28,17 @@ const studentSchema = new Schema({
         default:null
     },
 
-    role:{
+    
+phone: {
+    type: String,
+    default: ""
+},
+
+resumeLink: {
+    type: String,
+    default: ""
+},
+role:{
 type:String,
 enum:["student","admin"],
 default:"student"

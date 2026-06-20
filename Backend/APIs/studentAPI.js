@@ -329,4 +329,30 @@ studentApp.get(
 
   }
 );
+
+studentApp.put(
+  "/update-profile/:id",
+  verifyToken("student"),
+  async (req, res) => {
+
+    const updatedStudent =
+      await Student.findByIdAndUpdate(
+        req.params.id,
+        {
+          name: req.body.name,
+          branch: req.body.branch,
+          cgpa: req.body.cgpa,
+          phone: req.body.phone,
+          resumeLink: req.body.resumeLink
+        },
+        { new: true }
+      );
+
+    res.status(200).json({
+      message: "Profile Updated",
+      payload: updatedStudent
+    });
+
+  }
+);
 export default studentApp;
