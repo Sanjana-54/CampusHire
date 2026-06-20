@@ -43,15 +43,7 @@ delete req.body.secretCode;
 const newStudent = new Student(req.body); 
 
    const student = await newStudent.save();
-   await sendEmail(
-  student.email,
-  "CampusHire Registration",
-  `Hello ${student.name},
-
-Your account has been created successfully.
-
-Welcome to CampusHire!`
-);
+   
    res.status(201).json({
     message:
       student.role === "admin"
