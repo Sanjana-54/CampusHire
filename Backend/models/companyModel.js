@@ -18,10 +18,7 @@ lastDateToApply: {
   type: String,
   required: true
 },
-skills: {
-  type: [String],
-  default: []
-},
+
     minCGPA:{
         type:Number
     },

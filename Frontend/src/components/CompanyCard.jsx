@@ -83,12 +83,6 @@ return (
     {company.location}
   </span>
 </p>
-<p className="text-slate-600">
-  🛠️ Skills:
-  <span className="font-semibold ml-2">
-    {company.skills?.join(", ")}
-  </span>
-</p>
     <p className="text-slate-600">
       🎯 Min CGPA:
       <span className="font-semibold ml-2">
