@@ -6,7 +6,22 @@ const companySchema = new Schema({
         type:String,
         required:true
     },
-
+role: {
+  type: String,
+  required: true
+},
+location: {
+  type: String,
+  required: true
+},
+lastDateToApply: {
+  type: String,
+  required: true
+},
+skills: {
+  type: [String],
+  default: []
+},
     minCGPA:{
         type:Number
     },

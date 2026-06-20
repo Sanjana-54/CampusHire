@@ -39,10 +39,10 @@ function Profile() {
     <div className="min-h-screen bg-slate-100">
       <StudentSidebar />
 
-      <div className="md:ml-64 p-6">
-        <div className="bg-white rounded-3xl max-w-3xl shadow-sm overflow-hidden">
-
-          {/* Header banner */}
+      <div className="md:ml-64 p-8">
+        <div className="max-w-6xl mx-auto">
+        <div className="bg-white rounded-3xl w-full shadow-sm overflow-hidden">
+         {/* Header banner */}
           <div
             className="h-28 w-full"
             style={{
@@ -73,8 +73,7 @@ function Profile() {
               Personal Info
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div>
+           <div className="grid md:grid-cols-2 gap-x-20 gap-y-8 mb-8">  <div>
                 <p className="text-slate-500 mb-1">
                   👤 Name
                 </p>
@@ -120,7 +119,7 @@ function Profile() {
               Academic Info
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="grid md:grid-cols-2 gap-x-20 gap-y-8 mb-8">
               <div>
                 <p className="text-slate-500 mb-1">
                   🎓 Branch
@@ -210,6 +209,7 @@ function Profile() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

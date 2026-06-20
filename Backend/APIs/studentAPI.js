@@ -183,8 +183,8 @@ studentApp.get(
   }
 );
 
-// GET ELIGIBLE COMPANIES
-studentApp.get(
+
+   studentApp.get(
   "/eligible-companies/:id",
   verifyToken("student"),
   async (req, res) => {
@@ -202,16 +202,31 @@ studentApp.get(
         }
       });
 
-    console.log("Companies Found:", companies);
+    const companiesWithCount =
+      await Promise.all(
+        companies.map(async (company) => {
+
+          const count =
+            await Application.countDocuments({
+              companyId: company._id
+            });
+
+          return {
+            ...company.toObject(),
+            applicationCount: count
+          };
+
+        })
+      );
 
     res.status(200).json({
       message:
         "Eligible companies fetched successfully",
-      payload: companies
+      payload: companiesWithCount
     });
 
   }
-);
+);   
 
 // GET single student
 studentApp.get("/:id", async (req, res) => {

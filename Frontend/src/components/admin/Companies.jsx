@@ -154,6 +154,14 @@ await axios.post(
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
 
+<input
+  type="text"
+  placeholder="Role"
+  value={role}
+  onChange={(e) =>
+    setRole(e.target.value)
+  }
+/>
           <input
             type="number"
             step="0.1"

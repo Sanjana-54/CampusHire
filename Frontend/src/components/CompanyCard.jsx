@@ -70,7 +70,25 @@ return (
         {company.package} LPA
       </span>
     </p>
-
+   
+   <p className="text-slate-600">
+  💼 Role:
+  <span className="font-semibold ml-2">
+    {company.role}
+  </span>
+</p>
+<p className="text-slate-600">
+  🌍 Location:
+  <span className="font-semibold ml-2">
+    {company.location}
+  </span>
+</p>
+<p className="text-slate-600">
+  🛠️ Skills:
+  <span className="font-semibold ml-2">
+    {company.skills?.join(", ")}
+  </span>
+</p>
     <p className="text-slate-600">
       🎯 Min CGPA:
       <span className="font-semibold ml-2">
@@ -84,13 +102,25 @@ return (
         {company.allowedBranches?.join(", ")}
       </span>
     </p>
-
+<p className="text-slate-600">
+  ⏰ Apply Before:
+  <span className="font-semibold ml-2">
+    {company.lastDateToApply}
+  </span>
+</p>
     <p className="text-slate-600">
       📅 Drive Date:
       <span className="font-semibold ml-2">
         {company.driveDate?.slice(0, 10)}
       </span>
+     
     </p>
+    <p className="text-slate-600">
+  👥 Applied Students:
+  <span className="font-semibold ml-2">
+    {company.applicationCount}
+  </span>
+</p>
 
   </div>
 
