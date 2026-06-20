@@ -189,7 +189,18 @@ await axios.post(
             {...register("driveDate")}
             className="border border-slate-300 rounded-xl px-4 py-3"
           />
+          <input
+  type="text"
+  placeholder="Location"
+  {...register("location")}
+  className="border border-slate-300 rounded-xl px-4 py-3"
+/>
 
+<input
+  type="date"
+  {...register("lastDateToApply")}
+  className="border border-slate-300 rounded-xl px-4 py-3"
+/>
           <button
             type="submit"
            className="text-white rounded-xl py-3"
