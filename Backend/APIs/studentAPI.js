@@ -5,7 +5,7 @@ import Company from "../models/companyModel.js";
 import jwt from "jsonwebtoken";
 import { verifyToken } from "../middlewares/verifyToken.js";
 import bcrypt from "bcryptjs";
-import { sendEmail } from "../utils/sendEmail.js";
+import Notification from "../models/notificationModel.js";
 
 const studentApp = exp.Router();
 
@@ -351,6 +351,62 @@ studentApp.put(
     res.status(200).json({
       message: "Profile Updated",
       payload: updatedStudent
+    });
+
+  }
+);
+
+studentApp.get(
+  "/notifications/:id",
+  verifyToken("student"),
+  async (req, res) => {
+
+    const notifications =
+      await Notification.find({
+        studentId: req.params.id
+      }).sort({
+        createdAt: -1
+      });
+
+    res.status(200).json({
+      payload: notifications
+    });
+
+  }
+);
+
+studentApp.get(
+  "/unread-count/:id",
+  verifyToken("student"),
+  async (req, res) => {
+
+    const count =
+      await Notification.countDocuments({
+        studentId: req.params.id,
+        isRead: false
+      });
+
+    res.status(200).json({
+      payload: count
+    });
+
+  }
+);
+
+studentApp.put(
+  "/read-notification/:id",
+  verifyToken("student"),
+  async (req, res) => {
+
+    await Notification.findByIdAndUpdate(
+      req.params.id,
+      {
+        isRead: true
+      }
+    );
+
+    res.status(200).json({
+      message: "Notification read"
     });
 
   }

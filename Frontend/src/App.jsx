@@ -12,6 +12,7 @@ import AdminCompaniesPage from "./components/admin/Companies";
 import AdminStudentsPage from "./components/admin/Students";
 import AdminApplicationsPage from "./components/admin/Applications";
 import Profile from "./components/Profile";
+import Notifications from "./components/Notifications";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -67,7 +68,14 @@ function App() {
     </ProtectedRoute>
   )
 },
-
+{
+  path: "notifications",
+  element: (
+    <ProtectedRoute allowedRole="student">
+      <Notifications />
+    </ProtectedRoute>
+  )
+},
 {
   path: "admin/dashboard",
   element: (

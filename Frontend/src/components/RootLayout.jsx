@@ -13,7 +13,8 @@ function RootLayout() {
   location.pathname === "/student-dashboard" ||
   location.pathname === "/companies" ||
   location.pathname === "/applications" ||
-  location.pathname === "/profile";
+  location.pathname === "/profile" ||
+  location.pathname === "/notifications"
 
   return (
     <div

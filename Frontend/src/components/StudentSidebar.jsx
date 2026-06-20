@@ -1,6 +1,47 @@
 import { NavLink } from "react-router";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function StudentSidebar() {
+  const [count, setCount] =
+  useState(0);
+
+useEffect(() => {
+
+  const fetchCount =
+    async () => {
+
+      const user =
+        JSON.parse(
+          localStorage.getItem("user")
+        );
+
+      const res =
+        await axios.get(
+          `https://campushire-pk1f.onrender.com/students/unread-count/${user._id}`,
+          {
+            withCredentials: true
+          }
+        );
+
+      setCount(
+        res.data.payload
+      );
+
+    };
+
+  fetchCount();
+
+  const interval =
+    setInterval(
+      fetchCount,
+      10000
+    );
+
+  return () =>
+    clearInterval(interval);
+
+}, []);
   return (
     <div className="bg-white shadow-lg h-screen w-56 fixed left-0 top-0 hidden md:flex flex-col">
       
@@ -50,6 +91,29 @@ function StudentSidebar() {
        >
             👤 Profile
      </NavLink>
+     <NavLink
+  to="/notifications"
+  className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium flex justify-between"
+>
+  <span>
+    🔔 Notifications
+  </span>
+
+  {count > 0 && (
+
+    <span
+      className="
+      bg-red-500
+      text-white
+      text-xs
+      px-2
+      rounded-full"
+    >
+      {count}
+    </span>
+
+  )}
+</NavLink>
      </div>
 
       {/* Logout */}

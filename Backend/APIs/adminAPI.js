@@ -3,6 +3,7 @@ import Student from "../models/studentModel.js";
 import Company from "../models/companyModel.js";
 import Application from "../models/applicationModel.js";
 import {verifyToken}  from "../middlewares/verifyToken.js";
+import Notification from "../models/notificationModel.js";
 
 const adminApp = exp.Router();
 
@@ -133,23 +134,68 @@ adminApp.get(
 );
 
 // UPDATE APPLICATION STATUS
-adminApp.patch("/update-status/:id", verifyToken("admin"),async (req, res) => {
+adminApp.patch(
+  "/update-status/:id",
+  verifyToken("admin"),
+  async (req, res) => {
 
     const updatedApplication =
-        await Application.findByIdAndUpdate(
+      await Application.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+      );
 
-            req.params.id,
-            req.body,
-            { new: true }
+    let message = "";
 
-        );
+    if (
+      req.body.status === "Selected"
+    ) {
 
-    res.status(200).json({
-        message: "Application status updated successfully",
-        payload: updatedApplication
+      message =
+        "🎉 Congratulations! You have been selected.";
+
+    }
+
+    else if (
+      req.body.status === "Shortlisted"
+    ) {
+
+      message =
+        "⭐ You have been shortlisted for the next round.";
+
+    }
+
+    else if (
+      req.body.status === "Rejected"
+    ) {
+
+      message =
+        "❌ Application status updated to Rejected.";
+
+    }
+
+    else {
+
+      message =
+        `📄 Application status updated to ${req.body.status}`;
+
+    }
+
+    await Notification.create({
+      studentId:
+        updatedApplication.studentId,
+      message
     });
 
-});
+    res.status(200).json({
+      message:
+        "Application status updated successfully",
+      payload: updatedApplication
+    });
+
+  }
+);
 
 // UPDATE APPLICATION ROUND
 adminApp.put(
