@@ -46,6 +46,7 @@ adminApp.get("/companies", verifyToken("admin"),async (req, res) => {
 
 });
 
+//GET eligibike studenta
 adminApp.get(
   "/eligible-students/:companyId",
   async (req, res) => {
@@ -86,6 +87,7 @@ adminApp.get(
 
   }
 );
+
 // UPDATE company
 adminApp.put("/company/:id", verifyToken("admin"),async (req, res) => {
 
@@ -145,6 +147,10 @@ adminApp.patch(
         req.body,
         { new: true }
       );
+      const application =
+  await Application.findById(
+    updatedApplication._id
+  ).populate("companyId");
 
     let message = "";
 
@@ -183,10 +189,17 @@ adminApp.patch(
     }
 
     await Notification.create({
-      studentId:
-        updatedApplication.studentId,
-      message
-    });
+studentId:
+updatedApplication.studentId,
+
+companyName:
+application.companyId?.companyName,
+
+type:
+req.body.status,
+
+message
+});
 
     res.status(200).json({
       message:

@@ -8,6 +8,16 @@ const notificationSchema = new Schema(
       required: true
     },
 
+    companyName: {
+      type: String,
+      default: ""
+    },
+
+    type: {
+      type: String,
+      default: ""
+    },
+
     message: {
       type: String,
       required: true
