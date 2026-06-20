@@ -134,87 +134,149 @@ await axios.post(
     <Sidebar />
     <div className="md:ml-64 p-6">
     
-    {/* Add Company Form */}
+   {/* Add Company Form */}
 
-      <div className="bg-white rounded-2xl p-6 mb-6">
+<div className="bg-white rounded-2xl p-6 mb-6">
 
-        <h2 className="text-2xl font-bold text-slate-800 mb-5">
-          Add Company
-        </h2>
+  <h2 className="text-2xl font-bold text-slate-800 mb-6">
+    Add Company
+  </h2>
 
-        <form
-          className="grid md:grid-cols-2 gap-4"
-          onSubmit={handleSubmit(addCompany)}
-        >
+  <form
+    className="grid md:grid-cols-2 gap-5"
+    onSubmit={handleSubmit(addCompany)}
+  >
 
-          <input
-            type="text"
-            placeholder="Company Name"
-            {...register("companyName")}
-            className="border border-slate-300 rounded-xl px-4 py-3"
-          />
+    {/* Company Name */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Company Name
+      </label>
 
-          <input
-  type="text"
-  placeholder="Role (e.g. AI Engineer, Software Engineer, Data Analyst)"
-  {...register("role")}
-  className="border border-slate-300 rounded-xl px-4 py-3"
-/>
-          <input
-            type="number"
-            step="0.1"
-           min="0"
-           max="10"
-            placeholder="Minimum CGPA"
-            {...register("minCGPA")}
-            className="border border-slate-300 rounded-xl px-4 py-3"
-          />
+      <input
+        type="text"
+        placeholder="Amazon"
+        {...register("companyName")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
 
-          <input
-            type="text"
-            placeholder="Allowed Branches"
-            {...register("allowedBranches")}
-            className="border border-slate-300 rounded-xl px-4 py-3"
-          />
+    {/* Role */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Job Role
+      </label>
 
-          <input
-            type="text"
-            placeholder="Package (LPA)"
-            {...register("package")}
-            className="border border-slate-300 rounded-xl px-4 py-3"
-          />
+      <input
+        type="text"
+        placeholder="AI Engineer, Software Engineer, Data Analyst..."
+        {...register("role")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
 
-          <input
-            type="date"
-            {...register("driveDate")}
-            className="border border-slate-300 rounded-xl px-4 py-3"
-          />
-          <input
-  type="text"
-  placeholder="Location"
-  {...register("location")}
-  className="border border-slate-300 rounded-xl px-4 py-3"
-/>
+    {/* Minimum CGPA */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Minimum CGPA
+      </label>
 
-<input
-  type="date"
-  {...register("lastDateToApply")}
-  className="border border-slate-300 rounded-xl px-4 py-3"
-/>
-          <button
-            type="submit"
-           className="text-white rounded-xl py-3"
-style={{
-  background:
-    "linear-gradient(90deg,#4C2F9E,#FF7043)",
-}}
-          >
-            Add Company
-          </button> 
+      <input
+        type="number"
+        step="0.1"
+        min="0"
+        max="10"
+        placeholder="8.5"
+        {...register("minCGPA")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
 
-        </form>
+    {/* Allowed Branches */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Allowed Branches
+      </label>
 
-      </div>
+      <input
+        type="text"
+        placeholder="CSE, AIML, IT"
+        {...register("allowedBranches")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
+
+    {/* Package */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Package (LPA)
+      </label>
+
+      <input
+        type="text"
+        placeholder="18"
+        {...register("package")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
+
+    {/* Location */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Location
+      </label>
+
+      <input
+        type="text"
+        placeholder="Hyderabad"
+        {...register("location")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
+
+    {/* Drive Date */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Drive Date
+      </label>
+
+      <input
+        type="date"
+        {...register("driveDate")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
+
+    {/* Last Date To Apply */}
+    <div>
+      <label className="block text-sm font-medium text-slate-600 mb-2">
+        Last Date To Apply
+      </label>
+
+      <input
+        type="date"
+        {...register("lastDateToApply")}
+        className="border border-slate-300 rounded-xl px-4 py-3 w-full"
+      />
+    </div>
+
+    {/* Submit Button */}
+    <div className="md:col-span-2">
+      <button
+        type="submit"
+        className="w-full text-white rounded-xl py-3 font-semibold"
+        style={{
+          background:
+            "linear-gradient(90deg,#4C2F9E,#FF7043)",
+        }}
+      >
+        Add Company
+      </button>
+    </div>
+
+  </form>
+
+</div>
 
       {/* Companies Table */}
 
