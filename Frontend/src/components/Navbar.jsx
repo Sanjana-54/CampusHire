@@ -7,13 +7,7 @@ function Navbar() {
   const user = JSON.parse(
     localStorage.getItem("user")
   );
-console.log("NAVBAR VERSION 123");
-console.log("Navbar User:", user);
-console.log(
-  "Navbar localStorage:",
-  localStorage.getItem("user")
-);
-console.log("Current Path:", location.pathname);
+
 
 const navStyle = ({ isActive }) => ({
   background: isActive
@@ -51,50 +45,6 @@ const navStyle = ({ isActive }) => ({
 </NavLink>
             </>
           )}
-
-          {user?.role === "student" && (
-            <>
-              <NavLink to="/student-dashboard" style={navStyle}>
-  Dashboard
-</NavLink>
-
-<NavLink to="/companies" style={navStyle}>
-  Companies
-</NavLink>
-
-<NavLink to="/applications" style={navStyle}>
-  Applications
-</NavLink>
-            </>
-          )}
-
-          {user?.role === "admin" && (
-            <>
-              <NavLink to="/admin/dashboard" style={navStyle}>
-  Dashboard
-</NavLink>
-
-<NavLink to="/admin-applications" style={navStyle}>
-  Manage Applications
-</NavLink>
-            </>
-          )}
-
-          {user && (
-  <button
-    onClick={() => {
-      localStorage.clear();
-      window.location.href = "/";
-    }}
-    className="px-4 py-2 rounded-full"
-    style={{
-      border: "2px solid #4C2F9E",
-      color: "#2D1B69",
-    }}
-  >
-    Logout
-  </button>
-)}
 
         </div>
 
