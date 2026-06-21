@@ -34,7 +34,8 @@ const navStyle = ({ isActive }) => ({
         </h1>
 
      <div className="flex flex-wrap justify-center gap-3 md:gap-6 items-center">
-        {!user && (
+        {(location.pathname === "/" ||
+    location.pathname === "/register") && (
             <>
              <NavLink to="/" style={navStyle}>
   Login
@@ -44,7 +45,7 @@ const navStyle = ({ isActive }) => ({
   Register
 </NavLink>
             </>
-          )}
+    )}
 
         </div>
 

@@ -7,6 +7,21 @@ import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
+  const user = JSON.parse(
+  localStorage.getItem("user")
+);
+
+useEffect(() => {
+
+  if (user?.role === "student") {
+    navigate("/student-dashboard");
+  }
+
+  if (user?.role === "admin") {
+    navigate("/admin/dashboard");
+  }
+
+}, []);
   const [role, setRole] = useState("student");
   const {
     register,
