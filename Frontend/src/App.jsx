@@ -13,6 +13,7 @@ import AdminStudentsPage from "./components/admin/Students";
 import AdminApplicationsPage from "./components/admin/Applications";
 import Profile from "./components/Profile";
 import Notifications from "./components/Notifications";
+import ForgotPassword from "./components/ForgotPassword";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -75,6 +76,10 @@ function App() {
       <Notifications />
     </ProtectedRoute>
   )
+},
+{
+  path: "forgot-password",
+  element: <ForgotPassword />
 },
 {
   path: "admin/dashboard",

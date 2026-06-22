@@ -432,4 +432,33 @@ studentApp.put(
 
   }
 );
+
+
+// to deal with forgot password
+studentApp.post(
+  "/forgot-password",
+  async (req, res) => {
+
+    const user =
+      await Student.findOne({
+        email: req.body.email
+      });
+
+    if (!user) {
+
+      return res.status(404).json({
+        message: "User not found"
+      });
+
+    }
+
+    res.status(200).json({
+      message: "User found"
+    });
+
+  }
+);
+    
+
+  
 export default studentApp;
