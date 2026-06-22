@@ -188,6 +188,13 @@ err.response?.data?.message ||
                 </p>
               )}
             </div>
+<p
+  onClick={() => navigate("/forgot-password")}
+  className="text-right text-sm cursor-pointer font-medium"
+  style={{ color: "#FF7043" }}
+>
+  Forgot Password?
+</p>
 
             <button
               type="submit"
@@ -197,13 +204,7 @@ err.response?.data?.message ||
                   "linear-gradient(90deg,#4C2F9E 0%, #FF7043 100%)",
               }}
             >
-              <p
-  onClick={() => navigate("/forgot-password")}
-  className="text-right mt-2 text-sm cursor-pointer"
-  style={{ color: "#FF7043" }}
->
-  Forgot Password?
-</p>
+             
               Login
             </button>
 
