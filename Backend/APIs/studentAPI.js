@@ -435,30 +435,38 @@ studentApp.put(
 
 
 // to deal with forgot password
-studentApp.post(
+studentApp.put(
   "/forgot-password",
   async (req, res) => {
 
-    const user =
-      await Student.findOne({
-        email: req.body.email
-      });
+    const user = await Student.findOne({
+      email: req.body.email
+    });
 
     if (!user) {
-
       return res.status(404).json({
         message: "User not found"
       });
-
     }
 
+    const hashedPassword =
+      await bcrypt.hash(
+        req.body.newPassword,
+        10
+      );
+
+    user.password =
+      hashedPassword;
+
+    await user.save();
+
     res.status(200).json({
-      message: "User found"
+      message:
+        "Password updated successfully"
     });
 
   }
 );
-    
 
   
 export default studentApp;

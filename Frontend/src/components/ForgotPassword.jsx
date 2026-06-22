@@ -1,57 +1,135 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useNavigate, NavLink } from "react-router";
+
+import {
+  pageBackground,
+  formCard,
+  formTitle,
+  formGroup,
+  labelClass,
+  inputClass,
+  submitBtn,
+  errorClass,
+  mutedText,
+  linkClass,
+} from "../styles/common";
 
 function ForgotPassword() {
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const resetPassword = async () => {
-
-    try {
-
-      await axios.post(
-        "https://campushire-pk1f.onrender.com/students/forgot-password",
-        { email }
-      );
-
-      toast.success("Password reset request submitted");
-
-    } catch (err) {
-
-      toast.error("User not found");
-
+  //submit form
+  const onSubmit = async (userObj) => {
+    //check passwords
+    if (userObj.newPassword !== userObj.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
     }
 
+    //api call
+    let res = await axios.put(
+    "https://campushire-pk1f.onrender.com/students/forgot-password",
+      {
+        email: userObj.email,
+        newPassword: userObj.newPassword,
+      }
+    );
+
+    //success
+    if (res.status === 200) {
+      toast.success("Password updated successfully");
+      navigate("/");
+    }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-white p-8 rounded-2xl shadow-md w-96">
+    <div
+      className={`${pageBackground} flex items-center justify-center py-16 px-4`}
+    >
+      <div className={formCard}>
+        {/* Title */}
+        <h2 className={formTitle}>Forgot Password</h2>
 
-        <h1 className="text-2xl font-bold mb-5">
-          Forgot Password
-        </h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Email */}
+          <div className={formGroup}>
+            <label className={labelClass}>Email</label>
 
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border p-3 rounded-xl w-full mb-4"
-        />
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className={inputClass}
+              {...register("email", {
+                required: "Email is required",
+              })}
+            />
 
-        <button
-          onClick={resetPassword}
-          className="w-full text-white py-3 rounded-xl"
-          style={{
-            background:
-              "linear-gradient(90deg,#4C2F9E,#FF7043)"
-          }}
-        >
-          Continue
-        </button>
+            {errors.email && (
+              <p className={errorClass}>{errors.email.message}</p>
+            )}
+          </div>
 
+          {/* New Password */}
+          <div className={formGroup}>
+            <label className={labelClass}>New Password</label>
+
+            <input
+              type="password"
+              placeholder="Enter new password"
+              className={inputClass}
+              {...register("newPassword", {
+                required: "New password is required",
+              })}
+            />
+
+            {errors.newPassword && (
+              <p className={errorClass}>
+                {errors.newPassword.message}
+              </p>
+            )}
+          </div>
+
+          {/* Confirm Password */}
+          <div className={formGroup}>
+            <label className={labelClass}>Confirm Password</label>
+
+            <input
+              type="password"
+              placeholder="Confirm password"
+              className={inputClass}
+              {...register("confirmPassword", {
+                required: "Confirm password is required",
+              })}
+            />
+
+            {errors.confirmPassword && (
+              <p className={errorClass}>
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <button type="submit" className={submitBtn}>
+            Reset Password
+          </button>
+        </form>
+
+        {/* Footer */}
+        <p className={`${mutedText} text-center mt-5`}>
+          Back to{" "}
+          <NavLink to="/login" className={linkClass}>
+            Login
+          </NavLink>
+        </p>
       </div>
     </div>
   );
