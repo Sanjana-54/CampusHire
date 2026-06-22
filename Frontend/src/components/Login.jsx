@@ -188,13 +188,13 @@ err.response?.data?.message ||
                 </p>
               )}
             </div>
-<p
+{/*<p
   onClick={() => navigate("/forgot-password")}
   className="text-right text-sm cursor-pointer font-medium"
   style={{ color: "#FF7043" }}
 >
   Forgot Password?
-</p>
+</p>*/}
 
             <button
               type="submit"
