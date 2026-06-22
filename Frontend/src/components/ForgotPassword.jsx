@@ -126,7 +126,7 @@ function ForgotPassword() {
         {/* Footer */}
         <p className={`${mutedText} text-center mt-5`}>
           Back to{" "}
-          <NavLink to="/login" className={linkClass}>
+          <NavLink to="/" className={linkClass}>
             Login
           </NavLink>
         </p>
