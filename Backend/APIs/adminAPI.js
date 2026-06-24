@@ -106,14 +106,17 @@ adminApp.put("/company/:id", verifyToken("admin"),async (req, res) => {
 
 
 // DELETE company
-adminApp.delete("/company/:id", verifyToken("admin"),async (req, res) => {
+adminApp.delete("/company/:id", async (req, res) => {
 
-    await Company.findByIdAndDelete(req.params.id);
+  await Company.findByIdAndDelete(req.params.id);
 
-    res.status(200).json({
-        message: "Company deleted successfully",
-        payload: null
-    });
+  await Application.deleteMany({
+    companyId: req.params.id
+  });
+
+  res.status(200).json({
+    message: "Company Deleted Successfully"
+  });
 
 });
 
@@ -336,4 +339,32 @@ adminApp.get(
   }
 );
 
+adminApp.get(
+  "/check-orphan-applications",
+  async (req, res) => {
+
+    const applications = await Application.find();
+
+    const orphanApps = [];
+
+    for (const app of applications) {
+
+      const student = await Student.findById(
+        app.studentId
+      );
+
+      if (!student) {
+        orphanApps.push(app);
+      }
+
+    }
+
+    res.json({
+      count: orphanApps.length,
+      orphanApps
+    });
+
+  }
+);
 export default adminApp;
+
