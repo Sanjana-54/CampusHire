@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import { verifyToken } from "../middlewares/verifyToken.js";
 import bcrypt from "bcryptjs";
 import Notification from "../models/notificationModel.js";
+import InterviewExperience from "../models/interviewExperienceModel.js";
 
 const studentApp = exp.Router();
 
@@ -434,4 +435,94 @@ studentApp.put(
 );
 
 
+// 
+studentApp.post(
+  "/interview-experience",
+  verifyToken("student"),
+  async (req, res) => {
+
+    const application = await Application.findOne({
+      studentId: req.body.studentId,
+      companyId: req.body.companyId,
+      status: "Selected"
+    });
+
+    if (!application) {
+      return res.status(400).json({
+        message: "Only selected students can share interview experiences."
+      });
+    }
+
+    const experience =
+      await InterviewExperience.create(req.body);
+
+    res.status(201).json({
+      message: "Interview experience shared successfully",
+      payload: experience
+    });
+
+  }
+);
+//
+studentApp.get(
+  "/interview-experiences",
+  verifyToken("student"),
+  async (req, res) => {
+
+    try {
+
+      const experiences =
+        await InterviewExperience.find()
+          .populate("studentId", "name branch")
+          .sort({ createdAt: -1 });
+
+      res.status(200).json({
+        payload: experiences
+      });
+
+    } catch (err) {
+
+      console.log(err);
+
+      res.status(500).json({
+        message: "Unable to fetch interview experiences"
+      });
+
+    }
+
+  }
+);
+//
+studentApp.get(
+  "/interview-experiences/company/:company",
+  verifyToken("student"),
+  async (req, res) => {
+
+    try {
+
+      const experiences =
+        await InterviewExperience.find({
+          companyName: {
+            $regex: req.params.company,
+            $options: "i"
+          }
+        })
+        .populate("studentId", "name branch");
+
+      res.status(200).json({
+        payload: experiences
+      });
+
+    } catch (err) {
+
+      console.log(err);
+
+      res.status(500).json({
+        message: "Search failed"
+      });
+
+    }
+
+  }
+);
 export default studentApp;

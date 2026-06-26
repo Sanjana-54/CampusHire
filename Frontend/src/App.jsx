@@ -13,6 +13,7 @@ import AdminStudentsPage from "./components/admin/Students";
 import AdminApplicationsPage from "./components/admin/Applications";
 import Profile from "./components/Profile";
 import Notifications from "./components/Notifications";
+import InterviewExperiences from "./components/InterviewExperiences";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -76,7 +77,14 @@ function App() {
     </ProtectedRoute>
   )
 },
-
+{
+  path: "interview-experiences",
+  element: (
+    <ProtectedRoute allowedRole="student">
+      <InterviewExperiences />
+    </ProtectedRoute>
+  )
+},
 {
   path: "admin/dashboard",
   element: (

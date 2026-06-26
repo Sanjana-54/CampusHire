@@ -159,6 +159,13 @@ useEffect(() => {
   )}
 </NavLink>
   
+  <NavLink
+  to="/interview-experiences"
+  className="px-4 py-3 rounded-xl hover:bg-slate-100 font-medium"
+>
+  🏆 Interview Experiences
+</NavLink>
+
      </div>
 
       {/* Logout */}
